@@ -1,0 +1,997 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4efe4"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="mobile-web-app-capable" content="yes">
+<title>Plan de Luciano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Papel crema + tinta, acentos vivos por materia, caritas dibujadas a mano. Una columna de teléfono con tres pestañas abajo. */
+:root{
+  --bg:#f4efe4; --surface:#fbf8f1; --ink:#1c1a17; --muted:#6b655b; --line:#ddd5c5; --meta:#2f6fd0;
+  --on-vivid:#1c1a17;
+  --ok:#00b487; --mid:#ffc549; --no:#ee8577; --sun:#ffc549;
+  --ok-soft:#d9f2e8; --mid-soft:#fdf0cc; --no-soft:#fbdcd8;
+  --a-suc:#775aff; --a-tri:#00b487; --a-mer:#f0a020; --a-tal:#3fb5e6; --a-opt:#ff7684; --a-peo:#ee8577; --a-rut:#a39c8f; --a-fza:#f2821e;
+  --p-suc:#d6ccff; --p-tri:#a6e8d1; --p-mer:#ffdf96; --p-tal:#b5e6f8; --p-opt:#ffc2c9; --p-peo:#ffb1ad; --p-rut:#e3ddd1; --p-fza:#ffcb9a;
+  --grain:.09;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,"Segoe UI",system-ui,sans-serif;
+  --f-meta:"Instrument Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#171512; --surface:#211e1a; --ink:#f1ebdf; --muted:#b0a796; --line:#3a352e; --meta:#8cb8ff;
+  --ok-soft:#173a30; --mid-soft:#3d3218; --no-soft:#432220; --grain:.05; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#171512; --surface:#211e1a; --ink:#f1ebdf; --muted:#b0a796; --line:#3a352e; --meta:#8cb8ff;
+  --ok-soft:#173a30; --mid-soft:#3d3218; --no-soft:#432220; --grain:.05; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--f-body);font-size:17px;line-height:1.45;margin:0}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:var(--grain);z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 110px;display:flex;flex-direction:column;gap:16px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.08}
+h1{font-size:2.3rem;font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.55rem;font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.1rem;font-weight:800}
+.meta{font-family:var(--f-meta);color:var(--meta);font-size:.98rem;letter-spacing:.02em;line-height:1.25}
+.meta.caps{text-transform:uppercase;font-size:.86rem;letter-spacing:.06em}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.top .mascot{width:76px;height:76px;flex:none;color:var(--on-vivid)}
+.status{margin-top:4px}
+.daynav{display:flex;align-items:center;gap:8px}
+.daynav .title{flex:1;min-width:0}
+button{font:inherit;color:inherit;cursor:pointer}
+.iconbtn{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:transparent;font-size:1.3rem;font-weight:700;flex:none}
+:focus-visible{outline:3px solid var(--meta);outline-offset:2px}
+.exam{position:relative;background:var(--no);color:var(--on-vivid);border-radius:22px 26px 20px 28px;padding:14px 16px;font-family:var(--f-display);font-weight:800;font-size:1.1rem;overflow:hidden}
+.exam::after{content:"";position:absolute;right:14px;top:-6px;width:34px;height:34px;border-radius:50%;background:var(--on-vivid);opacity:.12;box-shadow:-22px 30px 0 -10px var(--on-vivid)}
+.agenda{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.agenda li{display:flex;gap:10px;font-family:var(--f-display);font-weight:600;font-size:1.05rem}
+.agenda li::before{content:"→";color:var(--meta)}
+.nota{font-family:var(--f-meta);font-style:italic;font-size:1.08rem;color:var(--muted)}
+.prog{height:14px;border-radius:10px;border:2px solid var(--ink);overflow:hidden;background:transparent}
+.prog i{display:block;height:100%;background:var(--ok);border-right:2px solid var(--ink)}
+.prog i[style*="width:0%"]{border:0}
+.tasks{display:flex;flex-direction:column;gap:12px}
+.task{background:var(--surface);border:2px solid var(--ink);border-radius:18px;padding:12px 12px 12px 14px;display:flex;flex-direction:column;gap:9px;position:relative}
+.task::before{content:"";position:absolute;left:-2px;top:14px;bottom:14px;width:6px;border-radius:0 6px 6px 0;background:var(--area)}
+.task[data-st="hecho"]{background:var(--ok-soft)}
+.task[data-st="medio"]{background:var(--mid-soft)}
+.task[data-st="no"]{background:var(--no-soft)}
+.thead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tag{font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--on-vivid);background:var(--pill);padding:3px 10px;border-radius:12px 14px 11px 15px}
+.dur{margin-left:auto}
+.ttxt{margin:0}
+.btns{display:flex;gap:6px}
+.st{flex:1;min-height:44px;border-radius:14px;border:2px solid var(--line);background:transparent;font-weight:700;font-size:.92rem}
+.st[aria-pressed="true"]{color:var(--on-vivid);border-color:var(--ink)}
+.st[aria-pressed="true"][data-v="hecho"]{background:var(--ok)}
+.st[aria-pressed="true"][data-v="medio"]{background:var(--mid)}
+.st[aria-pressed="true"][data-v="no"]{background:var(--no)}
+details>summary{cursor:pointer;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details.more>summary{font-family:var(--f-meta);color:var(--meta);font-size:1rem}
+.fields{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.fields label{display:flex;flex-direction:column;gap:3px;font-size:.84rem;color:var(--muted);flex:1;min-width:120px}
+input[type=text],input[type=number],input[type=time],textarea{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:8px 10px;width:100%;min-height:44px}
+input:focus,textarea:focus{border-color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.card{background:var(--surface);border:2px solid var(--ink);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{min-width:48px;min-height:48px;border-radius:50%;border:2px solid var(--line);background:transparent;font-size:1.45rem;line-height:1;display:grid;place-items:center}
+.chip[aria-pressed="true"]{background:var(--sun);border-color:var(--ink)}
+.section-label{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+/* check-in de la mañana */
+.checkin{background:var(--surface);border:2px solid var(--ink);border-radius:26px 22px 28px 20px;overflow:hidden}
+.checkin>summary{padding:14px 16px;display:flex;align-items:center;gap:12px}
+.checkin>summary .sun{width:44px;height:44px;flex:none;color:var(--on-vivid)}
+.checkin>summary .st-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.checkin>summary .chev{font-size:1.2rem;transition:transform .2s}
+.checkin[open]>summary .chev{transform:rotate(90deg)}
+.ci-body{padding:0 16px 16px;display:flex;flex-direction:column;gap:18px}
+.ci-block{display:flex;flex-direction:column;gap:10px}
+.ci-block>h4{margin:0;font-family:var(--f-display);font-weight:800;font-size:1.02rem;display:flex;gap:8px;align-items:center}
+.ci-block>h4::after{content:"";flex:1;height:2px;background:var(--line);border-radius:2px}
+.q{display:flex;flex-direction:column;gap:6px}
+.q>.ql{font-weight:700;font-size:.95rem}
+.slept{font-family:var(--f-meta);font-size:1.05rem;color:var(--meta)}
+.scale .sh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.scale output{font-family:var(--f-display);font-weight:800;font-size:1.25rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scale .ends{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted)}
+input[type=range]{width:100%;height:44px;margin:0;accent-color:var(--ink);background:transparent}
+input[type=range].unset{opacity:.45}
+.emos{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.emo{border:2px solid var(--line);border-radius:16px;background:transparent;padding:6px 2px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.72rem;font-weight:700;min-height:44px;color:var(--ink)}
+.emo svg{width:40px;height:40px}
+.emo[aria-pressed="true"]{background:var(--sun);border-color:var(--ink);color:var(--on-vivid)}
+/* ejercicio dentro de Hoy */
+details.exd>summary{font-family:var(--f-meta);color:var(--meta);font-size:1rem}
+.exwrap{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.ex{display:flex;flex-direction:column;gap:4px;padding:10px 0;border-top:2px dashed var(--line)}
+.ex .row{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ex .row b{flex:1;min-width:0}
+.ex .sr{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.9rem}
+.rir{display:flex;gap:6px;flex-wrap:wrap}
+.rir .chip{font-size:1.05rem;font-weight:800;font-family:var(--f-display)}
+ul.rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:.92rem}
+/* semana */
+.week{display:flex;flex-direction:column;gap:10px}
+.wday{display:flex;align-items:center;gap:12px;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:10px 12px;text-align:left;width:100%}
+.wday.today{border-color:var(--ink)}
+.wday .d{font-family:var(--f-display);font-weight:800;width:62px;flex:none;line-height:1.05}
+.wday .d small{display:block;font-family:var(--f-meta);font-weight:400;color:var(--meta);font-size:.95rem}
+.wday .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.wday .face{width:36px;height:36px;flex:none}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--line)}
+.dot.hecho{background:var(--ok);border-color:var(--ok)}.dot.medio{background:var(--mid);border-color:var(--mid)}.dot.no{background:var(--no);border-color:var(--no)}
+.pill{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--no);color:var(--on-vivid);white-space:nowrap}
+.pill.prov{background:#bfe6c8}
+/* resumen */
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:100px 1fr 44px;gap:8px;align-items:center;font-size:.9rem}
+.bar .t{height:14px;border:2px solid var(--ink);border-radius:9px;overflow:hidden}
+.bar .t i{display:block;height:100%}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.big{font-family:var(--f-display);font-size:2.1rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stats .card{gap:4px;padding:12px 14px;border-radius:20px}
+.stats .card:nth-child(1){background:var(--p-tri)}.stats .card:nth-child(2){background:var(--p-suc)}
+.stats .card:nth-child(3){background:var(--p-mer)}.stats .card:nth-child(4){background:var(--p-tal)}
+.stats .card,.stats .card .meta{color:var(--on-vivid)}
+.topemo{display:flex;gap:14px;flex-wrap:wrap}
+.topemo div{display:flex;flex-direction:column;align-items:center;font-size:.82rem;font-weight:700}
+.topemo svg{width:48px;height:48px}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:2px solid var(--ink);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);z-index:5}
+nav.tabs button{flex:1;min-height:60px;border:0;background:none;font-family:var(--f-display);font-weight:800;font-size:.95rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+nav.tabs button span{font-size:1.15rem;line-height:1;width:34px;height:26px;display:grid;place-items:center;border-radius:13px}
+nav.tabs button[aria-current="page"]{color:var(--ink)}
+nav.tabs button[aria-current="page"] span{background:var(--sun);color:var(--on-vivid)}
+/* guía dentro de cada tarea */
+details.how>summary{font-family:var(--f-meta);color:var(--meta);font-size:1.05rem}
+.steps{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.step{display:flex;gap:10px;align-items:flex-start}
+.ck{flex:none;width:32px;height:32px;border-radius:10px 12px 9px 11px;border:2px solid var(--ink);background:transparent;font-weight:800;font-size:1rem;display:grid;place-items:center;margin-top:1px}
+.ck[aria-pressed="true"]{background:var(--ok);color:var(--on-vivid)}
+.sx{flex:1;min-width:0}
+.step.done .sx>b{text-decoration:line-through;text-decoration-thickness:2px}
+.qq{display:block;font-family:var(--f-meta);font-style:italic;font-size:1.08rem;color:var(--muted);line-height:1.3;margin-top:2px}
+.prompt{background:var(--bg);border:2px dashed var(--line);border-radius:12px;padding:10px;font-size:.92rem;margin-top:6px}
+.copy{margin-top:6px;min-height:42px;border-radius:12px;border:2px solid var(--ink);background:var(--sun);color:var(--on-vivid);font-weight:700;padding:0 14px}
+.hint{font-size:.86rem;color:var(--muted);margin:6px 0 0}
+/* ejercicios con monigote */
+.exfig{display:flex;gap:10px;align-items:center}
+.exfig svg{width:128px;flex:none;color:var(--ink);background:var(--bg);border-radius:14px}
+ol.tech,ul.tech{margin:6px 0 0;padding-left:20px;font-size:.92rem;display:flex;flex-direction:column;gap:4px}
+a.vid{display:inline-flex;align-items:center;min-height:44px;margin-right:14px;font-weight:700;color:var(--meta)}
+/* noche */
+.checkin.night>summary .sun{color:var(--on-vivid)}
+.txt3{display:flex;flex-direction:column;gap:8px}
+.txt3 label{display:flex;flex-direction:column;gap:3px;font-size:.9rem;font-weight:700}
+/* pestaña Guía */
+.gcard h3{display:flex;gap:8px;align-items:center}
+.gcard ol,.gcard ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:5px}
+.gcard details>summary{font-family:var(--f-display);font-weight:800;font-size:1.05rem;padding:4px 0}
+.gcard details{border-top:2px dashed var(--line);padding-top:8px}
+@media (prefers-reduced-motion:no-preference){.task,.st,.chip,.emo{transition:background .15s,border-color .15s}.chip:active,.emo:active,.st:active{transform:scale(.94)}}
+</style>
+
+<div class="wrap" id="app">
+  <div class="top">
+    <div><div class="meta caps">Plan de estudio · 2 nov → 2 dic</div><h1 id="viewTitle">Hoy</h1><div class="meta status" id="status">Cargando registro…</div></div>
+    <svg class="mascot" id="mascot" viewBox="0 0 64 64" aria-hidden="true"></svg>
+  </div>
+  <main id="view"></main>
+</div>
+<nav class="tabs" aria-label="Secciones">
+  <button data-tab="hoy"><span>☀</span>Hoy</button>
+  <button data-tab="semana"><span>▦</span>Semana</button>
+  <button data-tab="guia"><span>✎</span>Guía</button>
+  <button data-tab="resumen"><span>◔</span>Resumen</button>
+</nav>
+
+<script>
+/* ───────── PLAN ───────── */
+const AREAS={SUC:["Sucesorio","suc"],TRI:["Tributario","tri"],MER:["Mercantil","mer"],TAL:["Taller (Civil y Procesal)","tal"],OPT:["Optativo","opt"],PEO:["Proc. Especiales Orales","peo"],RUT:["Rutina","rut"],FZA:["Ejercicio","fza"]};
+const CLASES={1:"15:30–18:20 clases",2:"14:00–16:50 clases",3:"08:00–10:50 · 14:00–16:50 · 17:00–18:20 clases",4:"09:30–10:50 · 14:00–16:50 clases",5:"14:00–16:50 clases"};
+const T=(a,txt,min)=>({a,txt,min});
+const PLAN=[
+ {f:"2026-11-02",agenda:["12:00 Patronato","14:00–15:20 ayudantía de Sucesorio (SMF SC-228)"],nota:"Mañana suave: caminata, nada exigente.",t:[
+  T("SUC","Después de clases: sin mirar, escribe lo que viste en la ayudantía. Luego verifica con tu apunte.",30)]},
+ {f:"2026-11-03",agenda:["18:30–19:30 clase magistral de Litigación"],t:[
+  T("SUC","Mañana, 2 h: apunte, primer tercio. Bloques de 15 min: leer con pregunta → cerrar y escribir → verificar.",120),
+  T("TRI","Audio U1 + resumen de la unidad. Al terminar, escribe de memoria lo principal.",60)]},
+ {f:"2026-11-04",agenda:[],nota:"Día más cargado: solo cabe el mediodía.",t:[
+  T("TRI","Mediodía: audio U2 (Parte 1 y 2) + resumen. Escribe de memoria.",60),
+  T("SUC","Si queda energía: 15 min de repaso sin mirar del primer tercio.",15)]},
+ {f:"2026-11-05",agenda:[],nota:"Día de Tributario: antes de las 9:30 y de 11:00 a 14:00.",t:[
+  T("TRI","Audio U3 + resumen.",60),
+  T("TRI","Preguntas tipo prueba escrita, respondidas sin mirar → verifica con el resumen.",90),
+  T("SUC","15 min de repaso sin mirar.",15)]},
+ {f:"2026-11-06",exam:"Prueba de Tributario · 14:00 (escrita)",agenda:[],t:[
+  T("TRI","Mañana: repaso corto con el resumen. Nada nuevo.",45)]},
+ {f:"2026-11-07",agenda:[],nota:"Sucesorio a fondo, de día.",t:[
+  T("SUC","Apunte: segundo tercio.",120),
+  T("SUC","Apunte: último tercio.",90)]},
+ {f:"2026-11-08",agenda:[],t:[
+  T("SUC","Apoyo: resumen de Somarriva + material de acciones sucesorias, solo para lo que falló.",90),
+  T("SUC","Simulacro oral con Claude: yo pregunto, tú respondes en voz alta.",45),
+  T("SUC","Anota en una hoja lo que fallaste en el simulacro.",15)]},
+ {f:"2026-11-09",exam:"Prueba de Sucesorio · 15:30 (oral)",agenda:[],t:[
+  T("SUC","Mañana: repaso final solo de la hoja de fallos. Nada nuevo.",60)]},
+ {f:"2026-11-10",exam:"Prueba de Administrativo · horario de clase (fuera del plan)",agenda:[],nota:"Empieza el plan completo de ejercicio. Procesal vuelve.",t:[
+  T("MER","Apunte final de Contratación Mercantil, parte 1. Pregunta → leer → cerrar y escribir requisitos y plazos.",60),
+  T("TAL","Procesal, juicio ordinario: demanda y contestación. Podcast 1 + Esquema 02 + CPC arts. 254 a 261 y 303 a 312.",60)]},
+ {f:"2026-11-11",agenda:["11:00–12:30 charla «Uso responsable de IA»"],t:[
+  T("MER","Después de la charla: apunte de Mercantil, parte 2.",60)]},
+ {f:"2026-11-12",agenda:[],nota:"Hueco grande: 11:00 a 14:00.",t:[
+  T("MER","Apunte de Mercantil, parte 3.",75),
+  T("TAL","Procesal: prueba y sentencia. Podcast 2 + CPC arts. 318 a 320 y 160 a 170.",75)]},
+ {f:"2026-11-13",agenda:[],t:[
+  T("MER","Apunte de Mercantil, parte 4.",60),
+  T("TAL","Procesal: juicio ejecutivo con el Esquema 01 (títulos del 434, excepciones del 464).",60)]},
+ {f:"2026-11-14",agenda:[],t:[
+  T("MER","Requisitos y plazos de memoria: hazte tus propias tarjetas y pruébate.",90),
+  T("TAL","Civil: actos jurídicos y obligaciones (Esquema 03) + casos de integración 1 y 2, resueltos por ti.",120)]},
+ {f:"2026-11-15",agenda:[],t:[
+  T("MER","Preguntas orales de Mercantil en voz alta, de todo el apunte.",60),
+  T("TAL","Civil: contratos (Esquemas 04 y 07) + casos de integración 3 y 4.",120)]},
+ {f:"2026-11-16",agenda:[],nota:"Estudio entre 12:00 y 15:30. La mañana del lunes, liviana.",t:[
+  T("MER","Repaso de lo que fallaste en tarjetas y preguntas.",60),
+  T("TAL","Bienes, sucesión y responsabilidad (Esquemas 05 y 08) + casos 5 y 6.",90)]},
+ {f:"2026-11-17",agenda:[],nota:"Mañana es la prueba de Mercantil. Si hoy no alcanzas la sesión de ejercicio, haz la siguiente que toque.",t:[
+  T("MER","Simulacro oral de Mercantil con Claude.",60),
+  T("MER","Hoja de fallos del simulacro.",30),
+  T("TAL","Procedimientos especiales (Esquema 09), solo el mapa.",60)]},
+ {f:"2026-11-18",exam:"Prueba de Contratación Mercantil · horario de clase (oral)",agenda:[],t:[
+  T("MER","Antes: repaso de la hoja de fallos. Nada nuevo.",30),
+  T("TAL","Después de la prueba: simulacro oral corto del Taller con Claude.",45)]},
+ {f:"2026-11-19",exam:"Prueba del Taller de integración · horario de clase (oral)",agenda:[],t:[
+  T("TAL","Mañana: repaso de la hoja de fallos del Taller. Nada nuevo.",60)]},
+ /* tramo provisional */
+ {f:"2026-11-20",prov:1,agenda:[],t:[T("OPT","Optativo: reunir el material y armar el mapa del programa completo.",60)]},
+ {f:"2026-11-21",prov:1,agenda:[],t:[T("OPT","Optativo: primera parte del programa.",150),T("RUT","Decide si das la prueba voluntaria de Administrativo (24 nov).",5)]},
+ {f:"2026-11-22",prov:1,agenda:[],t:[T("OPT","Optativo: segunda parte del programa.",150)]},
+ {f:"2026-11-23",prov:1,agenda:[],t:[T("OPT","Optativo: tercera parte + preguntas escritas sin mirar.",90),T("MER","Preparar la actividad del 10 % de Mercantil (25 nov, 8:00).",45)]},
+ {f:"2026-11-24",prov:1,exam:"Administrativo voluntaria (si decides darla)",agenda:[],t:[T("OPT","Optativo: repaso de fallos.",90),T("MER","Actividad del 10 %: repaso corto.",30)]},
+ {f:"2026-11-25",prov:1,exam:"Optativo (escrita, acumulativa) · 08:00 actividad 10 % de Mercantil",agenda:[],t:[T("OPT","Mañana: repaso corto. Nada nuevo.",30)]},
+ {f:"2026-11-26",prov:1,agenda:[],t:[T("PEO","PEO: mapa de Familia (Ley 19.968, CDN, Ley 21.430) con tus apuntes.",120)]},
+ {f:"2026-11-27",prov:1,agenda:[],t:[T("PEO","PEO: Familia, audiencias y plazos.",120)]},
+ {f:"2026-11-28",prov:1,agenda:[],t:[T("PEO","PEO: Laboral, procedimiento de aplicación general.",150)]},
+ {f:"2026-11-29",prov:1,agenda:[],t:[T("PEO","PEO: Laboral, otros procedimientos + casos.",150)]},
+ {f:"2026-11-30",prov:1,agenda:[],t:[T("PEO","PEO: casos orales de Familia y Laboral.",120)]},
+ {f:"2026-12-01",prov:1,agenda:[],t:[T("PEO","PEO: simulacro oral con Claude + hoja de fallos.",120)]},
+ {f:"2026-12-02",prov:1,exam:"Procedimientos Especiales Orales (oral)",agenda:[],t:[T("PEO","Mañana: repaso de la hoja de fallos.",45)]}
+];
+const RUTINAS=f=>{
+  const corto=f<"2026-11-10", d=new Date(f+"T12:00:00").getDay();
+  const r=[T("RUT","Registro de comidas (mientras comes).",15),
+    T("RUT",corto?"Mecanografía, 10 min, como pausa entre bloques.":"Mecanografía, 20 min.",corto?10:20)];
+  if(!corto&&d===6) r.push(T("RUT","Inglés del sábado: Perfect English Grammar + ELSA + 10 min de conversación.",40));
+  else if(!corto&&d===0) r.push(T("RUT","Inglés del domingo: repaso de errores + describir tu cuarto en voz alta.",20));
+  else r.push(T("RUT","Inglés: Duolingo + 10 min de cuaderno (¿sujeto y verbo?).",15));
+  r.push(T("RUT","Caminata de 15–20 min.",20));
+  return r;
+};
+/* ───────── EJERCICIO ───────── */
+/* Plan de fuerza en casa (aprobado el 3-nov). Mar 3: sesión suave; sáb 7: test de nivel; lun 9: nada; desde el mar 10, la sesión según el día. */
+const FIG={"remo2": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M70.3 31.3 L71.3 43.2 L69 54 M54 46 L48.9 60.1 L58 72 L63 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M70.3 31.3 L71.3 43.2 L69 54 M54 46 L48.9 60.1 L58 72 L63 72;M70.3 31.3 L71.3 43.2 L69 54 M54 46 L48.9 60.1 L58 72 L63 72;M70.3 31.3 L71.8 43.2 L61 41 M54 46 L48.9 60.1 L58 72 L63 72;M70.3 31.3 L71.8 43.2 L61 41 M54 46 L48.9 60.1 L58 72 L63 72;M70.3 31.3 L71.3 43.2 L69 54 M54 46 L48.9 60.1 L58 72 L63 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M54 46 L70.3 31.3 M70.3 31.3 L72.4 43.1 L71 54 M54 46 L50.3 60.5 L60 72 L65 72\" ><animate attributeName=\"d\" values=\"M54 46 L70.3 31.3 M70.3 31.3 L72.4 43.1 L71 54 M54 46 L50.3 60.5 L60 72 L65 72;M54 46 L70.3 31.3 M70.3 31.3 L72.4 43.1 L71 54 M54 46 L50.3 60.5 L60 72 L65 72;M54 46 L70.3 31.3 M70.3 31.3 L73.9 42.8 L63 41 M54 46 L50.3 60.5 L60 72 L65 72;M54 46 L70.3 31.3 M70.3 31.3 L73.9 42.8 L63 41 M54 46 L50.3 60.5 L60 72 L65 72;M54 46 L70.3 31.3 M70.3 31.3 L72.4 43.1 L71 54 M54 46 L50.3 60.5 L60 72 L65 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"76.7\" cy=\"27.3\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M78.4 30 L80.5 33.4\" ></path><path d=\"M67.5 53 h7 v7 h-7 Z M69.5 53 v-1.5 h3 v1.5\" fill=\"var(--a-fza)\" stroke=\"currentColor\" stroke-width=\"1.6\"><animate attributeName=\"d\" values=\"M67.5 53 h7 v7 h-7 Z M69.5 53 v-1.5 h3 v1.5;M67.5 53 h7 v7 h-7 Z M69.5 53 v-1.5 h3 v1.5;M59.5 40 h7 v7 h-7 Z M61.5 40 v-1.5 h3 v1.5;M59.5 40 h7 v7 h-7 Z M61.5 40 v-1.5 h3 v1.5;M67.5 53 h7 v7 h-7 Z M69.5 53 v-1.5 h3 v1.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "remo1": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M28 58 H74 M30 58 V74 M72 58 V74 M30 58 V40\" stroke=\"var(--muted)\" stroke-width=\"2\" fill=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M65.5 35.1 L68.7 46.7 L70.9 57.5 M45 43 L45 58 L30 58 L25 58\" stroke=\"var(--muted)\" opacity=\".55\"></path><path d=\"M45 43 L65.5 35.1 M65.5 35.1 L71.1 45.8 L67 56 M45 43 L41.7 57.6 L46 72 L51 72\" ><animate attributeName=\"d\" values=\"M45 43 L65.5 35.1 M65.5 35.1 L71.1 45.8 L67 56 M45 43 L41.7 57.6 L46 72 L51 72;M45 43 L65.5 35.1 M65.5 35.1 L71.1 45.8 L67 56 M45 43 L41.7 57.6 L46 72 L51 72;M45 43 L65.5 35.1 M65.5 35.1 L68.7 46.7 L58 44 M45 43 L41.7 57.6 L46 72 L51 72;M45 43 L65.5 35.1 M65.5 35.1 L68.7 46.7 L58 44 M45 43 L41.7 57.6 L46 72 L51 72;M45 43 L65.5 35.1 M65.5 35.1 L71.1 45.8 L67 56 M45 43 L41.7 57.6 L46 72 L51 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"72.8\" cy=\"33.2\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M73.6 36.3 L74.6 40.1\" ></path><path d=\"M63.5 55 h7 v7 h-7 Z M65.5 55 v-1.5 h3 v1.5\" fill=\"var(--a-fza)\" stroke=\"currentColor\" stroke-width=\"1.6\"><animate attributeName=\"d\" values=\"M63.5 55 h7 v7 h-7 Z M65.5 55 v-1.5 h3 v1.5;M63.5 55 h7 v7 h-7 Z M65.5 55 v-1.5 h3 v1.5;M54.5 43 h7 v7 h-7 Z M56.5 43 v-1.5 h3 v1.5;M54.5 43 h7 v7 h-7 Z M56.5 43 v-1.5 h3 v1.5;M63.5 55 h7 v7 h-7 Z M65.5 55 v-1.5 h3 v1.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "curl": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M60 22 L59.6 34 L59.2 45 M60 44 L53.7 57.6 L58 72 L63 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M60 22 L59.6 34 L59.2 45 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L59.6 34 L59.2 45 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L59.6 34 L65.1 24.5 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L59.6 34 L65.1 24.5 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L59.6 34 L59.2 45 M60 44 L53.7 57.6 L58 72 L63 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M60 44 L60 22 M60 22 L60.4 34 L60.8 45 M60 44 L55.1 58.2 L61 72 L66 72\" ><animate attributeName=\"d\" values=\"M60 44 L60 22 M60 22 L60.4 34 L60.8 45 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L60.4 34 L60.8 45 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L60.8 34 L65 23.8 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L60.8 34 L65 23.8 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L60.4 34 L60.8 45 M60 44 L55.1 58.2 L61 72 L66 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"14.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M63.2 14.5 L67.2 14.5\" ></path><path d=\"M57.3 44 h7 v7 h-7 Z M59.3 44 v-1.5 h3 v1.5\" fill=\"var(--a-fza)\" stroke=\"currentColor\" stroke-width=\"1.6\"><animate attributeName=\"d\" values=\"M57.3 44 h7 v7 h-7 Z M59.3 44 v-1.5 h3 v1.5;M57.3 44 h7 v7 h-7 Z M59.3 44 v-1.5 h3 v1.5;M61.5 22.8 h7 v7 h-7 Z M63.5 22.8 v-1.5 h3 v1.5;M61.5 22.8 h7 v7 h-7 Z M63.5 22.8 v-1.5 h3 v1.5;M57.3 44 h7 v7 h-7 Z M59.3 44 v-1.5 h3 v1.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "chintuck": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M64 68 L52.1 69.3 L41.1 69.3 M42 68 L31.4 57.4 L28 72 L23.1 71.1\" stroke=\"var(--muted)\" opacity=\".55\"></path><path d=\"M42 68 L64 68 M64 68 L52 68.8 L41 68.8 M42 68 L31.7 57.1 L30 72 L25.1 71.1\" ></path><circle cx=\"71.5\" cy=\"68\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cy\" values=\"68;68;68.5;68.5;68\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M71.5 64.8 L71.5 60.8\" ><animate attributeName=\"d\" values=\"M71.5 64.8 L71.5 60.8;M71.5 64.8 L71.5 60.8;M69.5 66 L67 62.8;M69.5 66 L67 62.8;M71.5 64.8 L71.5 60.8\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "sentadilla": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M60 22 L71.7 24.5 L82.7 24.5 M60 44 L53.7 57.6 L58 72 L63 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M60 22 L71.7 24.5 L82.7 24.5 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L71.7 24.5 L82.7 24.5 M60 44 L53.7 57.6 L58 72 L63 72;M61.7 39.3 L73.7 39.3 L84.7 39.3 M50 58 L43 71.3 L58 72 L63 72;M61.7 39.3 L73.7 39.3 L84.7 39.3 M50 58 L43 71.3 L58 72 L63 72;M60 22 L71.7 24.5 L82.7 24.5 M60 44 L53.7 57.6 L58 72 L63 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M60 44 L60 22 M60 22 L71.8 24.1 L82.8 24.1 M60 44 L55.1 58.2 L61 72 L66 72\" ><animate attributeName=\"d\" values=\"M60 44 L60 22 M60 22 L71.8 24.1 L82.8 24.1 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L71.8 24.1 L82.8 24.1 M60 44 L55.1 58.2 L61 72 L66 72;M50 58 L61.7 39.3 M61.7 39.3 L73.7 38.9 L84.6 38.5 M50 58 L46 72.5 L61 72 L66 72;M50 58 L61.7 39.3 M61.7 39.3 L73.7 38.9 L84.6 38.5 M50 58 L46 72.5 L61 72 L66 72;M60 44 L60 22 M60 22 L71.8 24.1 L82.8 24.1 M60 44 L55.1 58.2 L61 72 L66 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"14.5\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"60;60;63.6;63.6;60\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"14.5;14.5;32.1;32.1;14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M63.2 14.5 L67.2 14.5\" ><animate attributeName=\"d\" values=\"M63.2 14.5 L67.2 14.5;M63.2 14.5 L67.2 14.5;M66.7 32.9 L70.6 34;M66.7 32.9 L70.6 34;M63.2 14.5 L67.2 14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "rumano": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M60 22 L60.7 34 L61.9 44.9 M60 44 L53.7 57.6 L58 72 L63 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M60 22 L60.7 34 L61.9 44.9 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L60.7 34 L61.9 44.9 M60 44 L53.7 57.6 L58 72 L63 72;M74.3 39.7 L73.9 51.7 L73.9 62.7 M53 45 L49.6 59.6 L58 72 L63 72;M74.3 39.7 L73.9 51.7 L73.9 62.7 M53 45 L49.6 59.6 L58 72 L63 72;M60 22 L60.7 34 L61.9 44.9 M60 44 L53.7 57.6 L58 72 L63 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M60 44 L60 22 M60 22 L61.6 33.9 L63.7 44.7 M60 44 L55.1 58.2 L61 72 L66 72\" ><animate attributeName=\"d\" values=\"M60 44 L60 22 M60 22 L61.6 33.9 L63.7 44.7 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L61.6 33.9 L63.7 44.7 M60 44 L55.1 58.2 L61 72 L66 72;M53 45 L74.3 39.7 M74.3 39.7 L74.8 51.7 L74.8 62.7 M53 45 L51.2 59.9 L60 72 L65 72;M53 45 L74.3 39.7 M74.3 39.7 L74.8 51.7 L74.8 62.7 M53 45 L51.2 59.9 L60 72 L65 72;M60 44 L60 22 M60 22 L61.6 33.9 L63.7 44.7 M60 44 L55.1 58.2 L61 72 L66 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"14.5\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"60;60;81.8;81.8;60\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"14.5;14.5;38.6;38.6;14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M63.2 14.5 L67.2 14.5\" ><animate attributeName=\"d\" values=\"M63.2 14.5 L67.2 14.5;M63.2 14.5 L67.2 14.5;M82.2 41.8 L82.8 45.8;M82.2 41.8 L82.8 45.8;M63.2 14.5 L67.2 14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M60.2 43.7 h7 v7 h-7 Z M62.2 43.7 v-1.5 h3 v1.5\" fill=\"var(--a-fza)\" stroke=\"currentColor\" stroke-width=\"1.6\"><animate attributeName=\"d\" values=\"M60.2 43.7 h7 v7 h-7 Z M62.2 43.7 v-1.5 h3 v1.5;M60.2 43.7 h7 v7 h-7 Z M62.2 43.7 v-1.5 h3 v1.5;M71.3 61.7 h7 v7 h-7 Z M73.3 61.7 v-1.5 h3 v1.5;M71.3 61.7 h7 v7 h-7 Z M73.3 61.7 v-1.5 h3 v1.5;M60.2 43.7 h7 v7 h-7 Z M62.2 43.7 v-1.5 h3 v1.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "zancada": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M60 22 L58.7 33.9 L57.6 44.9 M60 44 L53.7 57.6 L58 72 L63 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M60 22 L58.7 33.9 L57.6 44.9 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L58.7 33.9 L57.6 44.9 M60 44 L53.7 57.6 L58 72 L63 72;M54 34 L52.3 45.9 L50.8 56.8 M54 56 L39 55.9 L34 70 L35.7 65.3;M54 34 L52.3 45.9 L50.8 56.8 M54 56 L39 55.9 L34 70 L35.7 65.3;M60 22 L58.7 33.9 L57.6 44.9 M60 44 L53.7 57.6 L58 72 L63 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M60 44 L60 22 M60 22 L61.3 33.9 L62.4 44.9 M60 44 L55.1 58.2 L61 72 L66 72\" ><animate attributeName=\"d\" values=\"M60 44 L60 22 M60 22 L61.3 33.9 L62.4 44.9 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L61.3 33.9 L62.4 44.9 M60 44 L55.1 58.2 L61 72 L66 72;M54 56 L54 34 M54 34 L55.7 45.9 L57.2 56.8 M54 56 L49.1 70.2 L64 72 L69 72;M54 56 L54 34 M54 34 L55.7 45.9 L57.2 56.8 M54 56 L49.1 70.2 L64 72 L69 72;M60 44 L60 22 M60 22 L61.3 33.9 L62.4 44.9 M60 44 L55.1 58.2 L61 72 L66 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"14.5\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"60;60;54;54;60\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"14.5;14.5;26.5;26.5;14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M63.2 14.5 L67.2 14.5\" ><animate attributeName=\"d\" values=\"M63.2 14.5 L67.2 14.5;M63.2 14.5 L67.2 14.5;M57.2 26.5 L61.2 26.5;M57.2 26.5 L61.2 26.5;M63.2 14.5 L67.2 14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "pantorrilla": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M86 10 V74\" stroke=\"var(--muted)\" stroke-width=\"2\" fill=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M60 22 L59.2 34 L58.8 45 M60 44 L53.7 57.6 L58 72 L63 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M60 22 L59.2 34 L58.8 45 M60 44 L53.7 57.6 L58 72 L63 72;M60 22 L59.2 34 L58.8 45 M60 44 L53.7 57.6 L58 72 L63 72;M60 17 L59.2 29 L58.8 40 M60 39 L54.4 52.9 L58 67.5 L61.2 63.7;M60 17 L59.2 29 L58.8 40 M60 39 L54.4 52.9 L58 67.5 L61.2 63.7;M60 22 L59.2 34 L58.8 45 M60 44 L53.7 57.6 L58 72 L63 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M60 44 L60 22 M60 22 L71.3 26 L81.9 29.1 M60 44 L55.1 58.2 L61 72 L66 72\" ><animate attributeName=\"d\" values=\"M60 44 L60 22 M60 22 L71.3 26 L81.9 29.1 M60 44 L55.1 58.2 L61 72 L66 72;M60 44 L60 22 M60 22 L71.3 26 L81.9 29.1 M60 44 L55.1 58.2 L61 72 L66 72;M60 39 L60 17 M60 17 L71.2 21.4 L81.6 24.9 M60 39 L55.8 53.4 L61 67.5 L64.2 63.7;M60 39 L60 17 M60 17 L71.2 21.4 L81.6 24.9 M60 39 L55.8 53.4 L61 67.5 L64.2 63.7;M60 44 L60 22 M60 22 L71.3 26 L81.9 29.1 M60 44 L55.1 58.2 L61 72 L66 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"14.5\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cy\" values=\"14.5;14.5;9.5;9.5;14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M63.2 14.5 L67.2 14.5\" ><animate attributeName=\"d\" values=\"M63.2 14.5 L67.2 14.5;M63.2 14.5 L67.2 14.5;M63.2 9.5 L67.2 9.5;M63.2 9.5 L67.2 9.5;M63.2 14.5 L67.2 14.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "flexion": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M71.1 49 L71.9 61 L72 72 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M71.1 49 L71.9 61 L72 72 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3;M71.1 49 L71.9 61 L72 72 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3;M75 61 L82.8 70.1 L72 72 M53.4 65.2 L38.8 68.4 L24 70.8 L26.5 66.5;M75 61 L82.8 70.1 L72 72 M53.4 65.2 L38.8 68.4 L24 70.8 L26.5 66.5;M71.1 49 L71.9 61 L72 72 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M51.2 58.3 L71.1 49 M71.1 49 L72.9 60.9 L74 71.8 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7\" ><animate attributeName=\"d\" values=\"M51.2 58.3 L71.1 49 M71.1 49 L72.9 60.9 L74 71.8 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7;M51.2 58.3 L71.1 49 M71.1 49 L72.9 60.9 L74 71.8 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7;M53.4 65.2 L75 61 M75 61 L84.4 68.5 L74 72 M53.4 65.2 L38.8 68.5 L24 71 L26.5 66.7;M53.4 65.2 L75 61 M75 61 L84.4 68.5 L74 72 M53.4 65.2 L38.8 68.5 L24 71 L26.5 66.7;M51.2 58.3 L71.1 49 M71.1 49 L72.9 60.9 L74 71.8 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"77.9\" cy=\"45.8\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"77.9;77.9;82.4;82.4;77.9\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"45.8;45.8;59.6;59.6;45.8\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M79.3 48.7 L81 52.4\" ><animate attributeName=\"d\" values=\"M79.3 48.7 L81 52.4;M79.3 48.7 L81 52.4;M83 62.7 L83.8 66.6;M83 62.7 L83.8 66.6;M79.3 48.7 L81 52.4\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "escapular": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M71.1 49 L69.8 60.9 L68 71.8 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M71.1 49 L69.8 60.9 L68 71.8 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3;M71.1 49 L69.8 60.9 L68 71.8 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3;M72.6 52.5 L75.7 64.1 L68 72 M52 60.3 L38.1 65.9 L23.9 70.7 L26.4 66.4;M72.6 52.5 L75.7 64.1 L68 72 M52 60.3 L38.1 65.9 L23.9 70.7 L26.4 66.4;M71.1 49 L69.8 60.9 L68 71.8 M51.2 58.3 L37.7 64.8 L23.8 70.6 L26.3 66.3\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M51.2 58.3 L71.1 49 M71.1 49 L70.9 61 L70 72 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7\" ><animate attributeName=\"d\" values=\"M51.2 58.3 L71.1 49 M71.1 49 L70.9 61 L70 72 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7;M51.2 58.3 L71.1 49 M71.1 49 L70.9 61 L70 72 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7;M52 60.3 L72.6 52.5 M72.6 52.5 L77.1 63.6 L70 72 M52 60.3 L38.2 66 L24 71 L26.5 66.7;M52 60.3 L72.6 52.5 M72.6 52.5 L77.1 63.6 L70 72 M52 60.3 L38.2 66 L24 71 L26.5 66.7;M51.2 58.3 L71.1 49 M71.1 49 L70.9 61 L70 72 M51.2 58.3 L37.8 65 L24 71 L26.5 66.7\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"77.9\" cy=\"45.8\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"77.9;77.9;79.6;79.6;77.9\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"45.8;45.8;49.8;49.8;45.8\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M79.3 48.7 L81 52.4\" ><animate attributeName=\"d\" values=\"M79.3 48.7 L81 52.4;M79.3 48.7 L81 52.4;M80.7 52.8 L82.2 56.6;M80.7 52.8 L82.2 56.6;M79.3 48.7 L81 52.4\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "fondos": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M28 58 H52 M30 58 V74 M50 58 V74 M30 58 V36\" stroke=\"var(--muted)\" stroke-width=\"2\" fill=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M53 35 L53.3 47 L50 57.5 M55 57 L70 57.3 L73 72 L78 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M53 35 L53.3 47 L50 57.5 M55 57 L70 57.3 L73 72 L78 72;M53 35 L53.3 47 L50 57.5 M55 57 L70 57.3 L73 72 L78 72;M55 44 L60.6 54.6 L50 57.5 M57 66 L69.3 57.5 L73 72 L78 72;M55 44 L60.6 54.6 L50 57.5 M57 66 L69.3 57.5 L73 72 L78 72;M53 35 L53.3 47 L50 57.5 M55 57 L70 57.3 L73 72 L78 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M55 57 L53 35 M53 35 L54.1 46.9 L51 57.5 M55 57 L70 57.9 L75 72 L80 72\" ><animate attributeName=\"d\" values=\"M55 57 L53 35 M53 35 L54.1 46.9 L51 57.5 M55 57 L70 57.9 L75 72 L80 72;M55 57 L53 35 M53 35 L54.1 46.9 L51 57.5 M55 57 L70 57.9 L75 72 L80 72;M57 66 L55 44 M55 44 L61.5 54.1 L51 57.5 M57 66 L69.7 58 L75 72 L80 72;M57 66 L55 44 M55 44 L61.5 54.1 L51 57.5 M57 66 L69.7 58 L75 72 L80 72;M55 57 L53 35 M53 35 L54.1 46.9 L51 57.5 M55 57 L70 57.9 L75 72 L80 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"52.3\" cy=\"27.5\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"52.3;52.3;54.3;54.3;52.3\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"27.5;27.5;36.5;36.5;27.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M55.5 27.2 L59.5 26.9\" ><animate attributeName=\"d\" values=\"M55.5 27.2 L59.5 26.9;M55.5 27.2 L59.5 26.9;M57.5 36.2 L61.5 35.9;M57.5 36.2 L61.5 35.9;M55.5 27.2 L59.5 26.9\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "press": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M34 57 H52 M36 57 V74 M50 57 V74 M36 57 V32\" stroke=\"var(--muted)\" stroke-width=\"2\" fill=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M50 33 L60.2 39.3 L53 31 M50 55 L64.9 57 L64 72 L69 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M50 33 L60.2 39.3 L53 31 M50 55 L64.9 57 L64 72 L69 72;M50 33 L60.2 39.3 L53 31 M50 55 L64.9 57 L64 72 L69 72;M50 33 L50.8 21 L51 10 M50 55 L64.9 57 L64 72 L69 72;M50 33 L50.8 21 L51 10 M50 55 L64.9 57 L64 72 L69 72;M50 33 L60.2 39.3 L53 31 M50 55 L64.9 57 L64 72 L69 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M50 55 L50 33 M50 33 L58.6 41.4 L55 31 M50 55 L64.9 57 L66 72 L71 72\" ><animate attributeName=\"d\" values=\"M50 55 L50 33 M50 33 L58.6 41.4 L55 31 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L58.6 41.4 L55 31 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L51.8 21.1 L52.9 10.2 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L51.8 21.1 L52.9 10.2 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L58.6 41.4 L55 31 M50 55 L64.9 57 L66 72 L71 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"50\" cy=\"25.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M53.2 25.5 L57.2 25.5\" ></path><path d=\"M51.5 30 h7 v7 h-7 Z M53.5 30 v-1.5 h3 v1.5\" fill=\"var(--a-fza)\" stroke=\"currentColor\" stroke-width=\"1.6\"><animate attributeName=\"d\" values=\"M51.5 30 h7 v7 h-7 Z M53.5 30 v-1.5 h3 v1.5;M51.5 30 h7 v7 h-7 Z M53.5 30 v-1.5 h3 v1.5;M49.4 9.2 h7 v7 h-7 Z M51.4 9.2 v-1.5 h3 v1.5;M49.4 9.2 h7 v7 h-7 Z M51.4 9.2 v-1.5 h3 v1.5;M51.5 30 h7 v7 h-7 Z M53.5 30 v-1.5 h3 v1.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "triceps": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M34 57 H52 M36 57 V74 M50 57 V74 M36 57 V32\" stroke=\"var(--muted)\" stroke-width=\"2\" fill=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M50 33 L50.3 21 L50 10 M50 55 L64.9 57 L64 72 L69 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M50 33 L50.3 21 L50 10 M50 55 L64.9 57 L64 72 L69 72;M50 33 L50.3 21 L50 10 M50 55 L64.9 57 L64 72 L69 72;M50 33 L52.1 21.2 L49.2 31.8 M50 55 L64.9 57 L64 72 L69 72;M50 33 L52.1 21.2 L49.2 31.8 M50 55 L64.9 57 L64 72 L69 72;M50 33 L50.3 21 L50 10 M50 55 L64.9 57 L64 72 L69 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M50 55 L50 33 M50 33 L51.3 21.1 L51.9 10.1 M50 55 L64.9 57 L66 72 L71 72\" ><animate attributeName=\"d\" values=\"M50 55 L50 33 M50 33 L51.3 21.1 L51.9 10.1 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L51.3 21.1 L51.9 10.1 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L51.7 21.1 L48.8 31.7 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L51.7 21.1 L48.8 31.7 M50 55 L64.9 57 L66 72 L71 72;M50 55 L50 33 M50 33 L51.3 21.1 L51.9 10.1 M50 55 L64.9 57 L66 72 L71 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"50\" cy=\"25.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M53.2 25.5 L57.2 25.5\" ></path><path d=\"M48.4 9.1 h7 v7 h-7 Z M50.4 9.1 v-1.5 h3 v1.5\" fill=\"var(--a-fza)\" stroke=\"currentColor\" stroke-width=\"1.6\"><animate attributeName=\"d\" values=\"M48.4 9.1 h7 v7 h-7 Z M50.4 9.1 v-1.5 h3 v1.5;M48.4 9.1 h7 v7 h-7 Z M50.4 9.1 v-1.5 h3 v1.5;M45.3 30.7 h7 v7 h-7 Z M47.3 30.7 v-1.5 h3 v1.5;M45.3 30.7 h7 v7 h-7 Z M47.3 30.7 v-1.5 h3 v1.5;M48.4 9.1 h7 v7 h-7 Z M50.4 9.1 v-1.5 h3 v1.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "puente": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M66 69 L54 69 L43 69 M44 69 L33.4 58.4 L27 72 L22.1 71.1\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M66 69 L54 69 L43 69 M44 69 L33.4 58.4 L27 72 L22.1 71.1;M66 69 L54 69 L43 69 M44 69 L33.4 58.4 L27 72 L22.1 71.1;M66 68 L54 67.4 L43 67.4 M46 58 L31 57.5 L27 72 L22.1 71.1;M66 68 L54 67.4 L43 67.4 M46 58 L31 57.5 L27 72 L22.1 71.1;M66 69 L54 69 L43 69 M44 69 L33.4 58.4 L27 72 L22.1 71.1\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M44 69 L66 69 M66 69 L54 68.6 L43 68.6 M44 69 L34 57.8 L29 72 L24.1 71.1\" ><animate attributeName=\"d\" values=\"M44 69 L66 69 M66 69 L54 68.6 L43 68.6 M44 69 L34 57.8 L29 72 L24.1 71.1;M44 69 L66 69 M66 69 L54 68.6 L43 68.6 M44 69 L34 57.8 L29 72 L24.1 71.1;M46 58 L66 68 M66 68 L54 67 L43 67 M46 58 L31 57.1 L29 72 L24.1 71.1;M46 58 L66 68 M66 68 L54 67 L43 67 M46 58 L31 57.1 L29 72 L24.1 71.1;M44 69 L66 69 M66 69 L54 68.6 L43 68.6 M44 69 L34 57.8 L29 72 L24.1 71.1\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"73.5\" cy=\"69\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"73.5;73.5;72.7;72.7;73.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"69;69;71.4;71.4;69\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M73.5 65.8 L73.5 61.8\" ><animate attributeName=\"d\" values=\"M73.5 65.8 L73.5 61.8;M73.5 65.8 L73.5 61.8;M73.3 68.2 L74 64.3;M73.3 68.2 L74 64.3;M73.5 65.8 L73.5 61.8\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "deadbug": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M68 69 L68.4 57 L68.8 46 M46 69 L46.5 54 L31.5 54 L31.5 49\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M68 69 L68.4 57 L68.8 46 M46 69 L46.5 54 L31.5 54 L31.5 49;M68 69 L68.4 57 L68.8 46 M46 69 L46.5 54 L31.5 54 L31.5 49;M68 69 L68.4 57 L68.8 46 M46 69 L31.2 66.4 L16.3 65.1 L12 67.6;M68 69 L68.4 57 L68.8 46 M46 69 L31.2 66.4 L16.3 65.1 L12 67.6;M68 69 L68.4 57 L68.8 46 M46 69 L46.5 54 L31.5 54 L31.5 49\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M46 69 L68 69 M68 69 L68 57 L68 46 M46 69 L46 54 L31 54 L31 49\" ><animate attributeName=\"d\" values=\"M46 69 L68 69 M68 69 L68 57 L68 46 M46 69 L46 54 L31 54 L31 49;M46 69 L68 69 M68 69 L68 57 L68 46 M46 69 L46 54 L31 54 L31 49;M46 69 L68 69 M68 69 L79.6 65.9 L90.4 64 M46 69 L46 54 L31 54 L31 49;M46 69 L68 69 M68 69 L79.6 65.9 L90.4 64 M46 69 L46 54 L31 54 L31 49;M46 69 L68 69 M68 69 L68 57 L68 46 M46 69 L46 54 L31 54 L31 49\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"75.5\" cy=\"69\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M75.5 65.8 L75.5 61.8\" ></path></g>", "plancha": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M70 61 L76 71.4 L85.5 76.9 M47 69 L34.3 61.1 L23 71 L25.5 66.7\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M70 61 L76 71.4 L85.5 76.9 M47 69 L34.3 61.1 L23 71 L25.5 66.7;M70 61 L76 71.4 L85.5 76.9 M47 69 L34.3 61.1 L23 71 L25.5 66.7;M70 59 L76 69.4 L85.5 74.9 M46 64 L31.9 58.9 L23 71 L25.5 66.7;M70 59 L76 69.4 L85.5 74.9 M46 64 L31.9 58.9 L23 71 L25.5 66.7;M70 61 L76 71.4 L85.5 76.9 M47 69 L34.3 61.1 L23 71 L25.5 66.7\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M47 69 L70 61 M70 61 L82 61.7 L78 72 M47 69 L34.7 60.5 L24 71 L26.5 66.7\" ><animate attributeName=\"d\" values=\"M47 69 L70 61 M70 61 L82 61.7 L78 72 M47 69 L34.7 60.5 L24 71 L26.5 66.7;M47 69 L70 61 M70 61 L82 61.7 L78 72 M47 69 L34.7 60.5 L24 71 L26.5 66.7;M46 64 L70 59 M70 59 L81.7 61.6 L78 72 M46 64 L32.1 58.4 L24 71 L26.5 66.7;M46 64 L70 59 M70 59 L81.7 61.6 L78 72 M46 64 L32.1 58.4 L24 71 L26.5 66.7;M47 69 L70 61 M70 61 L82 61.7 L78 72 M47 69 L34.7 60.5 L24 71 L26.5 66.7\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"77.1\" cy=\"58.5\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"77.1;77.1;77.3;77.3;77.1\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"58.5;58.5;57.5;57.5;58.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M79.7 56.7 L83 54.4\" ><animate attributeName=\"d\" values=\"M79.7 56.7 L83 54.4;M79.7 56.7 L83 54.4;M80 55.6 L83.2 53.3;M80 55.6 L83.2 53.3;M79.7 56.7 L83 54.4\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "birddog": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M68 49 L67.6 61 L67.2 72 M46 57 L45.5 72 L30.5 72 L33 67.7\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M68 49 L67.6 61 L67.2 72 M46 57 L45.5 72 L30.5 72 L33 67.7;M68 49 L67.6 61 L67.2 72 M46 57 L45.5 72 L30.5 72 L33 67.7;M68 49 L79.9 47.7 L90.9 46.6 M46 57 L31 57.5 L16 58 L11.7 60.5;M68 49 L79.9 47.7 L90.9 46.6 M46 57 L31 57.5 L16 58 L11.7 60.5;M68 49 L67.6 61 L67.2 72 M46 57 L45.5 72 L30.5 72 L33 67.7\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M46 57 L68 49 M68 49 L68 61 L68 72 M46 57 L46 72 L31 72 L33.5 67.7\" ></path><circle cx=\"75.4\" cy=\"47.7\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M75.9 50.8 L76.6 54.8\" ></path></g>", "wallslide": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"12\" y=\"6\" width=\"96\" height=\"68\" rx=\"3\" fill=\"var(--line)\" opacity=\".35\" stroke=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M0 0 L0 0\" stroke=\"var(--muted)\" opacity=\".55\"></path><path d=\"M60 21 L60 44 M54 23 L66 23 M66 23 L77.1 18.5 L76.7 7.5 M54 23 L42.9 18.5 L43.3 7.5 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72\" ><animate attributeName=\"d\" values=\"M60 21 L60 44 M54 23 L66 23 M66 23 L77.1 18.5 L76.7 7.5 M54 23 L42.9 18.5 L43.3 7.5 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L77.1 18.5 L76.7 7.5 M54 23 L42.9 18.5 L43.3 7.5 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L72 12.6 L74.3 1.8 M54 23 L48 12.6 L45.7 1.8 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L72 12.6 L74.3 1.8 M54 23 L48 12.6 L45.7 1.8 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L77.1 18.5 L76.7 7.5 M54 23 L42.9 18.5 L43.3 7.5 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"13.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><circle cx=\"57.8\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"></circle><circle cx=\"62.2\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"></circle></g>", "ytw": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M0 0 L0 0\" stroke=\"var(--muted)\" opacity=\".55\"></path><path d=\"M60 21 L60 44 M54 23 L66 23 M66 23 L72 12.6 L77.5 3.1 M54 23 L48 12.6 L42.5 3.1 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72\" ><animate attributeName=\"d\" values=\"M60 21 L60 44 M54 23 L66 23 M66 23 L72 12.6 L77.5 3.1 M54 23 L48 12.6 L42.5 3.1 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L72 12.6 L77.5 3.1 M54 23 L48 12.6 L42.5 3.1 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L78 23 L89 23 M54 23 L42 23 L31 23 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L78 23 L89 23 M54 23 L42 23 L31 23 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L77.6 19.9 L82.2 29.9 M54 23 L42.4 19.9 L37.8 29.9 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L77.6 19.9 L82.2 29.9 M54 23 L42.4 19.9 L37.8 29.9 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72;M60 21 L60 44 M54 23 L66 23 M66 23 L72 12.6 L77.5 3.1 M54 23 L48 12.6 L42.5 3.1 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72\" keyTimes=\"0;0.1;0.3;0.4;0.7;0.8;1\" dur=\"5.4s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"13.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><circle cx=\"57.8\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"></circle><circle cx=\"62.2\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"></circle></g>", "toracica": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M28 58 H52 M30 58 V74 M50 58 V74 M30 58 V38\" stroke=\"var(--muted)\" stroke-width=\"2\" fill=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M37 34 L49 34.6 L39 30 M37 56 L52 57 L52 72 L57 72\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M37 34 L49 34.6 L39 30 M37 56 L52 57 L52 72 L57 72;M37 34 L49 34.6 L39 30 M37 56 L52 57 L52 72 L57 72;M29.5 35.3 L41.4 36.7 L32 31 M37 56 L52 57 L52 72 L57 72;M29.5 35.3 L41.4 36.7 L32 31 M37 56 L52 57 L52 72 L57 72;M37 34 L49 34.6 L39 30 M37 56 L52 57 L52 72 L57 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M37 56 L37 34 M37 34 L48.7 36.8 L40 30 M37 56 L52 57.1 L54 72 L59 72\" ><animate attributeName=\"d\" values=\"M37 56 L37 34 M37 34 L48.7 36.8 L40 30 M37 56 L52 57.1 L54 72 L59 72;M37 56 L37 34 M37 34 L48.7 36.8 L40 30 M37 56 L52 57.1 L54 72 L59 72;M37 56 L29.5 35.3 M29.5 35.3 L41 38.5 L33 31 M37 56 L52 57.1 L54 72 L59 72;M37 56 L29.5 35.3 M29.5 35.3 L41 38.5 L33 31 M37 56 L52 57.1 L54 72 L59 72;M37 56 L37 34 M37 34 L48.7 36.8 L40 30 M37 56 L52 57.1 L54 72 L59 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"38\" cy=\"26.6\" r=\"5.5\" fill=\"var(--surface)\"><animate attributeName=\"cx\" values=\"38;38;25.2;25.2;38\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/><animate attributeName=\"cy\" values=\"26.6;26.6;29.2;29.2;26.6\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><path d=\"M41.2 27 L45.2 27.6\" ><animate attributeName=\"d\" values=\"M41.2 27 L45.2 27.6;M41.2 27 L45.2 27.6;M27.8 27.3 L31.1 25.1;M27.8 27.3 L31.1 25.1;M41.2 27 L45.2 27.6\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path></g>", "caminata": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M60 22 L54.9 32.9 L53 43.7 M60 44 L49.8 55 L51 70 L55.3 67.5\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M60 22 L54.9 32.9 L53 43.7 M60 44 L49.8 55 L51 70 L55.3 67.5;M60 22 L54.9 32.9 L53 43.7 M60 44 L49.8 55 L51 70 L55.3 67.5;M60 22 L65.1 32.9 L72.8 40.7 M60 44 L60.5 59 L68 72 L73 72;M60 22 L65.1 32.9 L72.8 40.7 M60 44 L60.5 59 L68 72 L73 72;M60 22 L54.9 32.9 L53 43.7 M60 44 L49.8 55 L51 70 L55.3 67.5\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M60 44 L60 22 M60 22 L65.1 32.9 L72.8 40.7 M60 44 L60.5 59 L68 72 L73 72\" ><animate attributeName=\"d\" values=\"M60 44 L60 22 M60 22 L65.1 32.9 L72.8 40.7 M60 44 L60.5 59 L68 72 L73 72;M60 44 L60 22 M60 22 L65.1 32.9 L72.8 40.7 M60 44 L60.5 59 L68 72 L73 72;M60 44 L60 22 M60 22 L54.9 32.9 L53 43.7 M60 44 L49.8 55 L51 70 L55.3 67.5;M60 44 L60 22 M60 22 L54.9 32.9 L53 43.7 M60 44 L49.8 55 L51 70 L55.3 67.5;M60 44 L60 22 M60 22 L65.1 32.9 L72.8 40.7 M60 44 L60.5 59 L68 72 L73 72\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"60\" cy=\"14.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M63.2 14.5 L67.2 14.5\" ></path></g>", "costal": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><ellipse cx=\"54.1\" cy=\"66\" rx=\"6\" ry=\"3\" fill=\"var(--a-tal)\" opacity=\".45\" stroke=\"none\"><animate attributeName=\"ry\" values=\"3;3;5.5;5.5;3\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></ellipse><path d=\"M64 69 L53.6 75 L53 64 M42 69 L32.2 57.6 L28 72 L23.1 71.1\" stroke=\"var(--muted)\" opacity=\".55\"><animate attributeName=\"d\" values=\"M64 69 L53.6 75 L53 64 M42 69 L32.2 57.6 L28 72 L23.1 71.1;M64 69 L53.6 75 L53 64 M42 69 L32.2 57.6 L28 72 L23.1 71.1;M64 69 L52.4 72 L53 61 M42 69 L32.2 57.6 L28 72 L23.1 71.1;M64 69 L52.4 72 L53 61 M42 69 L32.2 57.6 L28 72 L23.1 71.1;M64 69 L53.6 75 L53 64 M42 69 L32.2 57.6 L28 72 L23.1 71.1\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><path d=\"M42 69 L64 69 M64 69 L53.6 75 L54 64 M42 69 L32.7 57.2 L30 72 L25.1 71.1\" ><animate attributeName=\"d\" values=\"M42 69 L64 69 M64 69 L53.6 75 L54 64 M42 69 L32.7 57.2 L30 72 L25.1 71.1;M42 69 L64 69 M64 69 L53.6 75 L54 64 M42 69 L32.7 57.2 L30 72 L25.1 71.1;M42 69 L64 69 M64 69 L52.3 71.9 L54 61 M42 69 L32.7 57.2 L30 72 L25.1 71.1;M42 69 L64 69 M64 69 L52.3 71.9 L54 61 M42 69 L32.7 57.2 L30 72 L25.1 71.1;M42 69 L64 69 M64 69 L53.6 75 L54 64 M42 69 L32.7 57.2 L30 72 L25.1 71.1\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></path><circle cx=\"71.5\" cy=\"69\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M71.5 65.8 L71.5 61.8\" ></path></g>", "isofrontal": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M34 57 H52 M36 57 V74 M50 57 V74 M36 57 V32\" stroke=\"var(--muted)\" stroke-width=\"2\" fill=\"none\"/><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M50 33 L49.2 45 L48.8 56 M50 55 L64.9 57 L64 72 L69 72\" stroke=\"var(--muted)\" opacity=\".55\"></path><path d=\"M50 55 L50 33 M50 33 L62 32.8 L57 23 M50 55 L64.9 57 L66 72 L71 72\" ></path><circle cx=\"50\" cy=\"25.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><path d=\"M53.2 25.5 L57.2 25.5\" ></path><path d=\"M70 18 h6 m-3 -3 l3 3 -3 3\" stroke=\"var(--a-fza)\" stroke-width=\"2\"><animate attributeName=\"opacity\" values=\".2;1;.2\" dur=\"1.6s\" repeatCount=\"indefinite\"/></path></g>", "isolateral": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M0 0 L0 0\" stroke=\"var(--muted)\" opacity=\".55\"></path><path d=\"M60 21 L60 44 M54 23 L66 23 M66 23 L76.3 16.9 L66 13 M54 23 L52.3 34.9 L51.6 45.9 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72\" ></path><circle cx=\"60\" cy=\"13.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><circle cx=\"57.8\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"></circle><circle cx=\"62.2\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"></circle><path d=\"M78 13 h-6 m3 -3 l-3 3 3 3\" stroke=\"var(--a-fza)\" stroke-width=\"2\"><animate attributeName=\"opacity\" values=\".2;1;.2\" dur=\"1.6s\" repeatCount=\"indefinite\"/></path></g>", "rotacion": "<g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 74 H114\" stroke=\"var(--line)\" stroke-width=\"2\"/><path d=\"M0 0 L0 0\" stroke=\"var(--muted)\" opacity=\".55\"></path><path d=\"M60 21 L60 44 M54 23 L66 23 M66 23 L67.3 34.9 L67.8 45.9 M54 23 L52.7 34.9 L52.2 45.9 M56 44 L64 44 M57 44 L56 72 L52 72 M63 44 L64 72 L68 72\" ></path><circle cx=\"60\" cy=\"13.5\" r=\"5.5\" fill=\"var(--surface)\"></circle><circle cx=\"55.2\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"><animate attributeName=\"cx\" values=\"55.2;55.2;60.4;60.4;55.2\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle><circle cx=\"59.6\" cy=\"13\" r=\"1\" fill=\"currentColor\" stroke=\"none\"><animate attributeName=\"cx\" values=\"59.6;59.6;64.8;64.8;59.6\" keyTimes=\"0;0.1;0.5;0.7;1\" dur=\"3.6s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1\"/></circle></g>"};
+const X={
+ remo2:{n:"Remo con mochila (dos manos)",v:"h1WBkphGkN0",
+  i:"De pie, pies al ancho de las caderas y rodillas un poco dobladas. Llevas la cadera atrás hasta que el torso quede a unos 45°, con la espalda recta. Tomas la mochila de las tiras, brazos estirados.",
+  m:"Llevas la mochila hacia las costillas bajas, con los codos pegados al cuerpo. Arriba juntas los omóplatos 1 segundo y bajas lento.",
+  r:"Botas el aire al subir y lo tomas al bajar.",
+  e:"Encoger los hombros hacia las orejas, redondear la espalda o tirar con impulso del torso."},
+ remo1:{n:"Remo con una mano, apoyado en la silla",v:"pHEzSV5CjbQ",
+  i:"Mano y rodilla del mismo lado en la silla, espalda paralela al suelo. El otro pie queda en el suelo y la mochila cuelga del otro brazo.",
+  m:"Subes el codo hacia la cadera, pegado al cuerpo, y bajas lento hasta estirar el brazo.",
+  r:"Botas el aire al subir.",
+  e:"Girar el torso para subir la carga. El pecho mira siempre al suelo."},
+ curl:{n:"Curl de bíceps con mochila o bidón",v:"vjoIGHYiCjw",
+  i:"De pie, con la carga en las manos, los brazos estirados y los codos pegados al costado.",
+  m:"Doblas los codos y subes la carga hacia los hombros. Bajas en unos 3 segundos.",
+  r:"Botas el aire al subir.",
+  e:"Balancear el cuerpo o mover los codos hacia adelante."},
+ chintuck:{n:"Chin tuck acostado",v:"DMyt8gCnTFM",
+  i:"Boca arriba, con las rodillas dobladas y la cabeza apoyada.",
+  m:"Haces una «papada» suave: llevas el mentón hacia atrás sin levantar la cabeza. Sostienes y sueltas.",
+  r:"Normal. No aguantes el aire.",
+  e:"Apretar fuerte o levantar la cabeza del suelo. Debe ser suave."},
+ sentadilla:{n:"Sentadilla",v:"BjixzWEw4EY",
+  i:"De pie, pies al ancho de los hombros y puntas un poco hacia afuera. Si usas carga, la mochila va en la espalda o abrazada al pecho.",
+  m:"Bajas como para sentarte en una silla, con las rodillas en la dirección de los pies. Bajas hasta donde mantengas la espalda neutra y subes empujando el suelo.",
+  r:"Tomas el aire al bajar y lo botas al subir.",
+  e:"Juntar las rodillas hacia adentro o levantar los talones."},
+ rumano:{n:"Peso muerto rumano con mochila",v:"ujlI1EmWBBo",
+  i:"De pie, con la mochila tomada de las tiras frente a los muslos y las rodillas un poco dobladas.",
+  m:"Llevas la cadera hacia atrás y la mochila baja cerca de las piernas, hasta media canilla o hasta que tire la parte de atrás del muslo. Vuelves empujando la cadera hacia adelante.",
+  r:"Tomas el aire al bajar y lo botas al subir.",
+  e:"Redondear la espalda o convertirlo en sentadilla doblando mucho las rodillas."},
+ zancada:{n:"Zancada hacia atrás",v:"iQcb_o9kNiE",
+  i:"De pie, con los pies juntos. Si te cuesta el equilibrio, una mano en la silla.",
+  m:"Das un paso largo hacia atrás y bajas hasta que la rodilla de atrás casi toque el suelo. Vuelves empujando con la pierna de adelante.",
+  r:"Tomas el aire al bajar y lo botas al subir.",
+  e:"Que la rodilla de adelante se vaya hacia adentro."},
+ pantorrilla:{n:"Elevación de pantorrillas",v:"xDrezw4UkoE",
+  i:"De pie, con una mano en la pared.",
+  m:"Subes en la punta de los pies, sostienes 1 segundo y bajas lento.",
+  r:"Normal.",
+  e:"Rebotar rápido."},
+ flexion:{n:"Flexiones (la variante del test)",v:"b2UagYWNErY",v2:["Flexión inclinada en mesa","uaLRu1_aMuc"],
+  i:"Manos un poco más abiertas que los hombros y el cuerpo recto de la cabeza a los talones, con el abdomen y los glúteos apretados.",
+  m:"Bajas hasta que el pecho casi toque el suelo, con los codos a unos 45° del cuerpo. Subes empujando el suelo.",
+  r:"Tomas el aire al bajar y lo botas al subir.",
+  e:"Que la cadera se hunda o que los codos se abran en «T»."},
+ fondos:{n:"Fondos en silla",v:"7VuY1uy5Odw",
+  i:"La silla va contra la pared. Te sientas en el borde, manos a los costados de la cadera, y deslizas la cadera hacia adelante. Piernas dobladas: estirarlas lo hace más difícil.",
+  m:"Doblas los codos hacia atrás hasta 90° y subes.",
+  r:"Tomas el aire al bajar y lo botas al subir.",
+  e:"Bajar demasiado o subir los hombros a las orejas. Si te molesta el hombro, cámbialo por la extensión de tríceps."},
+ press:{n:"Press de hombros con mochila (sentado)",v:"9AQraNQRCYs",
+  i:"Sentado con la espalda apoyada y la mochila tomada de las tiras a la altura del pecho.",
+  m:"Empujas la carga hacia arriba hasta casi estirar los brazos y bajas lento hasta el mentón.",
+  r:"Botas el aire al subir.",
+  e:"Arquear la espalda baja. Si duele el hombro, reduce el recorrido o salta el ejercicio."},
+ escapular:{n:"Flexión escapular",v:"JEs_6eWYD5w",
+  i:"En posición de flexión, o de pie contra la pared, con los brazos estirados.",
+  m:"Sin doblar los codos, juntas los omóplatos (el pecho baja un poco) y después los separas empujando el suelo.",
+  r:"Normal.",
+  e:"Doblar los codos. Se mueven solo los omóplatos."},
+ puente:{n:"Puente de glúteos",v:"NUFvi-gPojg",
+  i:"Boca arriba, con las rodillas dobladas y los pies apoyados al ancho de la cadera.",
+  m:"Subes la cadera hasta formar una línea entre hombros y rodillas. Aprietas los glúteos 1 segundo y bajas.",
+  r:"Botas el aire al subir.",
+  e:"Arquear la espalda baja en vez de apretar los glúteos."},
+ deadbug:{n:"Dead bug",v:"XkTtXA3-IqU",
+  i:"Boca arriba, con los brazos hacia el techo y las rodillas dobladas a 90° en el aire.",
+  m:"Estiras lento un brazo hacia atrás y la pierna contraria hacia adelante, sin despegar la zona lumbar del suelo. Vuelves y cambias de lado.",
+  r:"Botas el aire al estirar.",
+  e:"Que se arquee la espalda baja. Si pasa, estira menos."},
+ plancha:{n:"Plancha lateral",v:"zfiOU4yxLKo",
+  i:"De lado, apoyado en el antebrazo, con el codo bajo el hombro. Si es muy difícil, apoya las rodillas.",
+  m:"Subes la cadera hasta que el cuerpo quede en línea recta y sostienes.",
+  r:"Normal y continua.",
+  e:"Dejar caer la cadera."},
+ birddog:{n:"Bird-dog",v:"QABW99qPiNM",
+  i:"En cuatro apoyos, con las manos bajo los hombros y las rodillas bajo la cadera.",
+  m:"Estiras lento un brazo y la pierna contraria hasta la línea del cuerpo, sostienes 2 segundos y vuelves.",
+  r:"Botas el aire al estirar.",
+  e:"Girar la cadera o levantar la pierna más alto que la espalda."},
+ wallslide:{n:"Wall slide",v:"gr3i4mU5kBc",
+  i:"Espalda, cabeza y cadera contra la pared, y los brazos en «W» apoyados en la pared.",
+  m:"Deslizas los brazos hacia arriba lo que puedas sin despegarlos y bajas.",
+  r:"Normal.",
+  e:"Forzar el recorrido o arquear la espalda baja."},
+ ytw:{n:"Y-T-W boca abajo",v:"pbbchkcJMe8",
+  i:"Boca abajo, con la frente sobre una toalla doblada.",
+  m:"Levantas un poco los brazos formando una Y (en diagonal arriba), después una T (a los lados) y después una W (codos doblados y pegados). Sostienes 2 segundos en cada una.",
+  r:"Normal.",
+  e:"Levantar la cabeza o subir los hombros. Lo que mueves son los omóplatos."},
+ triceps:{n:"Extensión de tríceps sobre la cabeza con mochila",v:"pTtImglvprE",
+  i:"Sentado con la espalda apoyada y la mochila tomada con las dos manos sobre la cabeza, brazos estirados.",
+  m:"Bajas la carga detrás de la cabeza doblando solo los codos, y subes.",
+  r:"Tomas el aire al bajar y lo botas al subir.",
+  e:"Abrir mucho los codos o arquear la espalda."},
+ toracica:{n:"Extensión torácica en silla",v:"izLuvPEq5-A",
+  i:"Sentado, con el borde del respaldo a la altura de los omóplatos y las manos detrás de la cabeza.",
+  m:"Extiendes suave la parte alta de la espalda sobre el respaldo y vuelves.",
+  r:"Tomas el aire al extender.",
+  e:"Tirar la cabeza hacia atrás. Se mueve el tórax, no el cuello."},
+ caminata:{n:"Caminata",m:"20 a 40 minutos, a ritmo cómodo."},
+ costal:{n:"Respiración costal, acostado",v:"7eqH-yzqhVQ",
+  i:"Boca arriba, con las manos en las costillas.",
+  m:"Al tomar aire sientes las costillas abrirse hacia los lados."},
+ isofrontal:{n:"Isométrico frontal",v:"MTRmb60nZoc",
+  i:"La palma va contra la frente.",
+  m:"Empujas la cabeza hacia adelante al 30-40 % de tu fuerza, sin mover la cabeza.",
+  r:"Normal. No aguantes el aire."},
+ isolateral:{n:"Isométrico lateral",v:"MTRmb60nZoc",
+  i:"La palma va contra la sien.",
+  m:"Igual que el frontal: empujas al 30-40 % de tu fuerza, sin mover la cabeza. Después, el otro lado."},
+ rotacion:{n:"Rotación cervical lenta",
+  m:"Giras la cabeza como para mirar sobre el hombro, sin buscar el máximo recorrido."}
+};
+const SES={
+ SUAVE:{n:"Sesión suave · espalda + bíceps",dur:30,nota:"Versión suave: 2 series por ejercicio y 3 RIR. Tiene que sobrarte energía.",
+  ex:[["remo2","2 × 8–12 · descanso 90 s"],["remo1","2 × 8–12 por brazo · descanso 60 s"],["curl","2 × 10–15 · descanso 60 s"],["chintuck","2 × 8, sosteniendo 5 s"]]},
+ TEST:{n:"Test de nivel, en casa",dur:30,test:1,nota:"Haz 1 serie de cada prueba. Paras cuando la técnica se empieza a deformar o sientes que te quedan unas 2 repeticiones. Descansa 2 minutos entre pruebas. No es para agotarte.",
+  ex:[["flexion","Flexiones normales → cuántas","Menos de 6: partes con flexiones inclinadas en mesa. De 6 a 15: flexiones normales. Más de 15: con la mochila puesta."],
+      ["remo2","Remo con mochila → cuántas (anota los kilos)","Menos de 8: saca peso. Más de 15: agrega peso."],
+      ["sentadilla","Sentadilla sin peso → cuántas","Más de 20: partes con mochila."],
+      ["puente","Puente de glúteos → cuántos",""],
+      ["plancha","Plancha lateral → segundos por lado",""],
+      ["deadbug","Dead bug → repeticiones controladas por lado",""],
+      ["wallslide","Wall slide → hasta dónde suben los brazos sin despegar la espalda, y si duele algo",""]]},
+ L1:{n:"Sesión 1 · espalda + bíceps",dur:30,ex:[["remo2","3 × 8–12 · descanso 90 s"],["remo1","3 × 8–12 por brazo · descanso 60 s"],["curl","3 × 10–15 · descanso 60 s"],["chintuck","2 × 8, sosteniendo 5 s"]]},
+ L2:{n:"Sesión 2 · piernas",dur:30,ex:[["sentadilla","3 × 8–15 · descanso 90 s"],["rumano","3 × 8–12 · descanso 90 s"],["zancada","2 × 8–12 por pierna · descanso 60 s"],["pantorrilla","2 × 12–20 · descanso 45 s"]]},
+ L3:{n:"Sesión 3 · pecho + tríceps + hombro",dur:30,ex:[["flexion","4 × 6–15 · descanso 90 s"],["fondos","3 × 8–15 · descanso 60 s"],["press","2 × 8–12 · descanso 60 s"],["escapular","2 × 10"]]},
+ L4:{n:"Sesión 4 · core + postura + piernas",dur:30,ex:[["puente","3 × 12–15 · descanso 60 s"],["deadbug","3 × 6–10 por lado · descanso 45 s"],["plancha","2 × 15–30 s por lado · descanso 45 s"],["birddog","2 × 6–8 por lado"],["wallslide","2 × 8–10"],["ytw","2 rondas de 5 de cada letra"]]},
+ L5:{n:"Sesión 5 · espalda + brazos + flexiones",dur:30,ex:[["remo2","3 × 8–12 · descanso 90 s"],["flexion","2 × 6–15 · descanso 90 s"],["curl","2 × 10–15 · descanso 60 s"],["triceps","2 × 10–15 · descanso 60 s"],["toracica","2 × 8"]]},
+ SAB:{n:"Sábado · caminata + cuello y postura",dur:40,sincal:1,ex:[["caminata","20–40 min"],["costal","2 × 5 respiraciones"],["chintuck","2 × 6, sosteniendo 5 s"],["isofrontal","2 × 10 s"],["isolateral","2 × 10 s por lado"],["rotacion","5 por lado"]]}
+};
+const fzaOf=f=>{if(f==="2026-11-03")return"SUAVE";if(f==="2026-11-07")return"TEST";if(f<"2026-11-10")return null;
+  return [null,"L1","L2","L3","L4","L5","SAB"][new Date(f+"T12:00:00").getDay()];};
+const CALENT=["Marcha en el lugar → 1 minuto","Círculos de hombros → 10 hacia adelante y 10 hacia atrás","Sentadilla sin peso → 8","Bisagra de cadera → 8","Una serie muy liviana del primer ejercicio → 5 a 8"];
+const STOP=["dolor agudo o que va en aumento","hormigueo o entumecimiento","debilidad","mareo o alteraciones visuales","dolor que baja al brazo"];
+const rirFase=f=>f<"2026-11-23"?"Semanas 1 y 2: aprendes la técnica, con 3 RIR.":f<"2026-12-07"?"Semanas 3 y 4: con 2 RIR. Intenta sumar 1 repetición por serie cada semana (ej.: 8-8-7 → 9-8-8 → 10-9-9).":"Semanas 5 a 8: 1-2 RIR en remo, flexiones, sentadilla y peso muerto rumano.";
+
+/* ───────── GUÍA «CÓMO HACERLO» (2 al 19 de noviembre) ───────── */
+const B=(b,q)=>({b,q}), S=b=>({b}), PR=(b,p)=>({b,p});
+const BLOQUE="Cada bloque: pregunta (1 min) → leer 15 min → cerrar y escribir 4 min → verificar 3 min → anotar el fallo → pausa de 3 a 5 min.";
+const SUC1=[
+ B("Bloque 1 · Secciones 1 a 3: concepto, principios y la sucesión por causa de muerte","¿Qué principios informan el derecho sucesorio? ¿En qué consiste cada uno? ¿Qué acepciones tiene la palabra «sucesión» y qué características tiene la sucesión por causa de muerte?"),
+ B("Bloque 2 · Secciones 4 y 5: herederos y legatarios; tipos de sucesión","¿Qué diferencia a un heredero de un legatario? ¿En qué tres hipótesis opera la sucesión intestada (art. 980)? ¿Qué reglas se aplican en la sucesión mixta?"),
+ B("Bloque 3 · Secciones 6.1 y 6.2: apertura y delación","¿Qué es la apertura de la sucesión y cuándo se produce? ¿Qué objetivo y qué sujetos permite determinar? ¿Qué es la delación (art. 956) y cuándo se produce?"),
+ B("Bloque 4 · Sección 6.3: aceptación y repudiación","¿Qué reglas son comunes a la aceptación y a la repudiación? ¿Cómo se clasifica la aceptación? ¿Cómo se repudia?"),
+ B("Bloque 5 · Sección 6.4: posesión efectiva","¿Qué vía corresponde según el tipo de sucesión? ¿Qué trámites siguen a la concesión? ¿Qué efectos tiene y cómo se rectifica? ¿En qué consiste el choque entre la posesión inscrita y la posesión efectiva según Somarriva?"),
+ B("Bloque 6 · Secciones 7 y 8: las tres posesiones y el derecho real de herencia","¿Qué diferencia la posesión legal, la real y la efectiva? ¿Qué características tiene el derecho real de herencia, cómo se adquiere y cómo prescribe? Repasa el ejemplo de clase del legado inoficioso.")];
+const ANTES=S("Antes de empezar: celular en «No molestar» y boca abajo; material, hoja en blanco y lápiz de otro color; temporizador en 15 min.");
+const GUIA={
+ "2026-11-02":{t0:{s:[
+  S("Apenas puedas, sin mirar nada: escribe los temas que se vieron en la ayudantía, uno por línea."),
+  S("Bajo cada tema, escribe lo que recuerdas: concepto, artículo, ejemplo."),
+  S("Busca cada tema en tu apunte y corrige en color."),
+  S("Lo corregido va a tu hoja «Fallos Sucesorio». Es la primera línea de esa hoja.")]}},
+ "2026-11-03":{
+  t0:{blk:1,pre:"Apunte «Sucesorio para SENA», secciones 1 a 8. Seis bloques.",s:[ANTES,...SUC1]},
+  t1:{s:[
+   S("Escucha el audio U1 (27 min). Cuando diga «Piénsalo», pausa y responde en voz alta antes de seguir."),
+   S("Lee en el resumen los puntos 1.1 a 1.18 (unos 20 min). Fíjate en lo que el audio no te dejó claro."),
+   B("Cierra todo y escribe de memoria (10 min):","¿Cuáles son los elementos de la obligación tributaria? ¿Cómo se clasifican los tributos? ¿Qué límites tiene el poder tributario? ¿Qué dicen el principio del domicilio y el de la fuente? ¿Cómo se soluciona la doble tributación? ¿Qué atribuciones tiene el Director Nacional del SII y cuáles los Directores Regionales?"),
+   S("Verifica con el resumen y anota los fallos en «Fallos Tributario».")]}},
+ "2026-11-04":{
+  t0:{s:[
+   S("Audio U2 Parte 1 v2 (19 min): comparecencia, notificaciones, fiscalización, citación, tasación, liquidación y giro. Pausa en cada «Piénsalo»."),
+   S("Audio U2 Parte 2 v2 (24 min): obligaciones accesorias, derechos de los contribuyentes, elusión y evasión, infracciones y delitos, extinción."),
+   B("Cierra todo y escribe de memoria (10 min):","¿Cuál es la forma general de notificar y cuáles las subsidiarias? ¿En qué orden van revisión → citación → tasación? ¿Qué obligaciones accesorias existen? ¿Qué diferencia la elusión de la evasión? ¿Cuáles son los modos de extinguir la obligación tributaria?"),
+   S("Verifica con el resumen, puntos 2.1 a 2.28. Anota los fallos.")]},
+  t1:{pre:"Repaso del martes: tapa el apunte y responde de memoria. Solo después miras.",s:SUC1.map(x=>B("Repaso · "+x.b.replace(/^Bloque \d+ · /,""),x.q))}},
+ "2026-11-05":{
+  t0:{s:[
+   S("Audio U3 (20 min), con pausas en cada «Piénsalo»."),
+   S("Lee el resumen, puntos 3.1 a 3.26 (25 min)."),
+   B("Escribe de memoria:","¿Cuáles son los hechos gravados básicos de venta y de servicios? ¿Cuándo se devenga el IVA? ¿Qué diferencia al contribuyente de derecho del de hecho? ¿Qué es el débito fiscal y qué es el crédito fiscal? ¿Qué operaciones dan derecho a crédito y cuáles no?")]},
+  t1:{pre:"Responde por escrito, sin mirar, como si fuera la prueba. Unos 6 minutos por pregunta. Al final corriges todo con el resumen.",s:[
+   "Defina tributo y explique su finalidad fiscal y extrafiscal.","Explique los elementos de la obligación tributaria.","Explique los límites del poder tributario.",
+   "Explique cómo se interpreta la ley tributaria y su aplicación en el tiempo.","Explique las formas de notificación en materia tributaria.",
+   "Describa las etapas de la auditoría tributaria: revisión, citación y tasación.","Enumere los derechos de los contribuyentes.",
+   "Distinga elusión y evasión, y explique la norma general antielusiva.","Explique los modos de extinción de la obligación tributaria.",
+   "Explique los hechos gravados del IVA: básicos y especiales.","Explique el débito y el crédito fiscal, y qué pasa con el remanente.",
+   "Explique el impuesto a los artículos suntuarios y a las bebidas.","Corrige todo con el resumen y anota los fallos en «Fallos Tributario»."].map(S)},
+  t2:{s:[S("Repaso del martes otra vez: solo las preguntas que fallaste el miércoles.")]}},
+ "2026-11-06":{t0:{s:[
+  S("Mañana (45 min): lee solo tu hoja «Fallos Tributario». Para cada línea, tapa la respuesta y dila en voz alta."),
+  S("Nada nuevo. Si te sobra tiempo, relee las 12 preguntas del jueves y respóndelas mentalmente."),
+  S("Come antes de salir y llega con tiempo.")]}},
+ "2026-11-07":{
+  t0:{blk:1,pre:"Segundo tercio: secciones 9 a 17. Seis bloques.",s:[ANTES,
+   B("Bloque 1 · Secciones 9 a 11: transmisibilidad, efectos de la muerte y casos de clase","¿Qué derechos y obligaciones no se transmiten? ¿Qué efectos jurídicos produce la muerte? ¿Cómo se resolvieron en clase el caso de los comurientes y el del nasciturus?"),
+   B("Bloque 2 · Secciones 12 y 13: legados y derecho de transmisión","¿Qué diferencia el legado de género del de especie? ¿Qué requisitos tiene el derecho de transmisión y qué debe reunir el transmitido? ¿En qué se distingue de la representación?"),
+   B("Bloque 3 · Sección 14: indignidades e incapacidades","¿Cuáles son las 11 causales de indignidad y de qué tipos son? ¿Qué diferencia la incapacidad absoluta (arts. 962 y 963) de la relativa (art. 964 y siguientes)?"),
+   B("Bloque 4 · Sección 15: derecho de representación","¿Cuándo opera: «no quiso» o «no pudo» suceder? ¿A quién se puede representar? ¿En qué órdenes opera y en cuál no? ¿Qué diferencia dividir por estirpe y por cabeza?"),
+   B("Bloque 5 · Sección 16: órdenes de sucesión","¿Quiénes heredan en cada uno de los cinco órdenes (arts. 988, 989, 990, 992 y 995)? ¿Cómo se reparte entre hijos y cónyuge? ¿Qué es la regla de simple o doble conjunción? Hazlo con un dibujo: un árbol familiar y flechas a cada orden."),
+   B("Bloque 6 · Sección 17: teoría de los acervos","¿En qué orden se forman los acervos y qué resulta de cada paso? Escribe la secuencia con flechas (→), de memoria, y compárala con la del apunte.")]},
+  t1:{blk:1,pre:"Último tercio: secciones 18 y 19. Cuatro bloques.",s:[
+   B("Bloque 7 · Secciones 18.1 a 18.3: el testamento","¿Cuál es el concepto de testamento, qué características tiene y qué requisitos debe cumplir?"),
+   B("Bloque 8 · Sección 18.4: testamentos solemnes","¿Cómo se abre el testamento abierto y cómo el cerrado? ¿Quiénes son testigos inhábiles? ¿Cuándo es nulo el testamento solemne (art. 1026 inc. 1)?"),
+   B("Bloque 9 · Testamentos menos solemnes y secciones 18.5.1 a 18.5.3","¿Qué testamentos privilegiados existen? ¿Qué diferencia una asignación condicional, una a plazo y una modal?"),
+   B("Bloque 10 · Sección 18.5.4 y sección 19","¿Qué clases de herederos existen? Repasa las nociones de apoyo: caución, prenda con y sin desplazamiento, y las reglas generales de prescripción.")]}},
+ "2026-11-08":{
+  t0:{s:[
+   S("Lee tu hoja «Fallos Sucesorio» completa y marca los 5 fallos que más te preocupan."),
+   S("Para cada uno, busca el tema en el «Resumen Somarriva pp.» y lee solo esa parte (máximo 10 min por tema). Cierra y escribe la versión correcta."),
+   B("Acciones sucesorias (40 min). Son seis: reforma de testamento, partición, nulidad de testamento, reivindicatoria de cosas hereditarias, inoficiosa donación y petición de herencia. Para cada una, tapa el documento y responde:","¿Qué es? ¿Qué artículos la regulan? ¿Qué requisitos tiene? ¿Para qué sirve? Después compara con el «Cuadro final de memoria» del mismo documento.")]},
+  t1:{s:[
+   PR("Copia este texto en un chat nuevo con Claude y responde en voz alta antes de escribir:","Hazme un simulacro oral de Derecho Sucesorio para mi prueba de mañana. Hazme una pregunta a la vez y espera mi respuesta. Después de cada respuesta, corrígeme según mi apunte y el Código Civil, citando el artículo. Mezcla preguntas de concepto con un caso de reparto (órdenes de sucesión y acervos). Temas: apertura y delación, aceptación y repudiación, posesión efectiva, derecho real de herencia, indignidades, representación y transmisión, órdenes de sucesión, acervos, testamento y asignaciones testamentarias, acciones sucesorias. Al final dame la lista de lo que fallé.")]},
+  t2:{s:[S("Copia la lista del simulacro a tu hoja de fallos. Esta hoja es lo único que lees mañana.")]}},
+ "2026-11-09":{t0:{s:[
+  S("Mañana (1 h): solo la hoja «Fallos Sucesorio». Cada línea: tapa, responde en voz alta, destapa."),
+  B("Practica en voz alta tu respuesta de 1 minuto a:","«¿Qué es la sucesión por causa de muerte y cuáles son sus tipos?» Sirve para partir tranquilo si te preguntan algo general."),
+  S("Nada nuevo. Almuerza y llega con tiempo.")]}},
+ "2026-11-10":{
+  t0:{blk:1,pre:"Apunte final de Contratación Mercantil, Parte I: introductoria. Tres bloques.",s:[
+   B("Bloque 1 · Puntos 1 y 2: orígenes y fenómenos de la contratación actual","¿Qué son las relaciones contractuales fácticas y los negocios jurídicos forzosos? ¿Qué cambia con el nuevo soporte de la voluntad y la internacionalidad?"),
+   B("Bloque 2 · Punto 3: contratos civiles y mercantiles","¿Cómo se distingue un contrato mercantil de uno civil? ¿Qué son los actos de empresa?"),
+   B("Bloque 3 · Punto 4: contrato de adhesión y cláusulas abusivas","¿Cuál es el concepto de contrato de adhesión y qué requisitos tiene? ¿Cuándo una cláusula es abusiva?")]},
+  t1:{s:[
+   S("Podcast 1 «Ordinario, mapa completo» (16 min)."),
+   S("Esquema 02, puntos 8 (secuencia completa del ordinario) y 9 (excepciones y reconvención)."),
+   S("Lee en el CPC los arts. 254 a 261 (demanda) y 303 a 312 (excepciones dilatorias y contestación)."),
+   B("Escribe de memoria:","¿Qué requisitos tiene la demanda? ¿Qué excepciones dilatorias existen? ¿Qué pasa si el demandado no contesta?")]}},
+ "2026-11-11":{t0:{blk:1,pre:"Parte II: compraventa mercantil. Tres bloques.",s:[
+  B("Bloque 1 · Puntos 1 y 2: definición y diferencias con la civil","¿Cuándo es mercantil una compraventa? ¿En qué se diferencia de la civil en el precio, los riesgos, la tradición y la resolución (saneamiento y plazos)?"),
+  B("Bloque 2 · Puntos 3 y 4: tipos y compraventas especiales","¿Qué son la compraventa en bloque, la venta por consignación, la de muebles a plazo con prenda sin desplazamiento y la compraventa en bolsa?"),
+  B("Bloque 3 · Punto 5: obligaciones y derechos de las partes","¿Qué debe el vendedor y qué el comprador? Anota cada plazo que aparezca."),
+  S("Repaso de la Parte I (15 min, repaso de 1 día): tapa el apunte y responde las preguntas de ayer.")]}},
+ "2026-11-12":{
+  t0:{blk:1,pre:"Parte III: mandato comercial. Tres bloques.",s:[
+   B("Bloque 1 · Puntos 1 y 2.1 a 2.3: comisión mercantil","¿Cómo se clasifica el mandato comercial? ¿Qué obligaciones, prohibiciones y derechos tiene el comisionista?"),
+   B("Bloque 2 · Puntos 2.4 a 2.6 y 3: tipos de comisión y corretaje","¿Qué diferencia la comisión para comprar y para vender? ¿Qué es el comisionista de transporte? ¿Cómo se extingue la comisión? ¿Qué hacen los corredores de comercio y de seguros?"),
+   B("Bloque 3 · Punto 4: factores y dependientes","¿Qué es un factor y qué es un mancebo o dependiente? ¿Cómo termina su mandato?")]},
+  t1:{s:[
+   S("Podcast 2 «Dilatorias, rebeldía y prueba»."),
+   S("Esquema 02, puntos 10 (la prueba) y 7 (resoluciones judiciales y sentencia)."),
+   S("Lee en el CPC los arts. 318 a 320 (recepción de la causa a prueba) y 160 a 170 (sentencia)."),
+   B("Escribe de memoria:","¿Qué contiene la resolución que recibe la causa a prueba? ¿Qué requisitos tiene la sentencia definitiva?")]}},
+ "2026-11-13":{
+  t0:{blk:1,pre:"Parte IV: contrato de seguro. Tres bloques.",s:[
+   B("Bloque 1 · Puntos 1 a 4: introducción, clasificación y definición","¿Por qué el seguro tiene carácter imperativo? ¿Cómo se clasifican los seguros? ¿Cuál es la definición legal y qué características tiene?"),
+   B("Bloque 2 · Puntos 5 a 7: principios, elementos y póliza","¿Qué principios informan el seguro? ¿Cuáles son sus elementos subjetivos y materiales? ¿Cómo se celebra y qué es la póliza?"),
+   B("Bloque 3 · Puntos 8 a 10: efectos, terminación y seguros marítimos","¿Qué obligaciones y cargas tiene el asegurado y cuáles el asegurador? ¿Cómo termina el contrato?"),
+   S("Repaso de la Parte II (15 min, repaso de 1 día).")]},
+  t1:{s:[
+   S("Esquema 01, puntos 2 y 5: los siete títulos ejecutivos del art. 434 y la gestión preparatoria."),
+   S("Punto 8: la oposición del ejecutado y las excepciones del art. 464."),
+   S("Punto 15: línea de tiempo del ejecutivo."),
+   S("Escribe de memoria los siete títulos y todas las excepciones que recuerdes. Verifica.")]}},
+ "2026-11-14":{
+  t0:{s:[
+   S("Recorre las cuatro partes del apunte y haz una tarjeta por cada requisito, plazo o lista. Adelante va la pregunta; atrás, la respuesta y su ubicación."),
+   S("Baraja las tarjetas y pruébate. Las que fallas van a un montón aparte."),
+   S("Repite solo el montón de falladas hasta vaciarlo.")]},
+  t1:{s:[
+   S("Esquema 03 en cuatro bloques: puntos 1 a 6 (contratos y nulidad) → 7 a 11 (efectos, modalidades, cláusula penal) → 12 (incumplimiento y responsabilidad contractual) → 13 a 15 (extinción, prueba, prescripción)."),
+   S("Caso 1, resuélvelo tú: la parcela comprada en 2005 por escritura pero nunca inscrita, la reivindicatoria y la prescripción adquisitiva alegada."),
+   S("Caso 2: la compraventa del departamento en La Serena con saldo de precio impago."),
+   S("Recién después de resolverlos, compara con las respuestas narrativas de los casos 1 y 2.")]}},
+ "2026-11-15":{
+  t0:{s:[PR("Copia este texto en un chat nuevo con Claude y responde en voz alta:","Hazme preguntas orales de Contratación Mercantil, una a la vez, sobre las cuatro partes de mi apunte: introductoria, compraventa mercantil, mandato comercial y seguro. Pon énfasis en requisitos y plazos. Corrígeme después de cada respuesta y al final dame la lista de lo que fallé.")]},
+  t1:{s:[
+   S("Esquema 04: compraventa, arrendamiento, mandato, comodato, mutuo, fianza, prenda, hipoteca y transacción."),
+   S("Esquema 07: arrendamiento completo y Ley 18.101, donación, permuta, cesión de créditos, depósito y sociedad."),
+   S("Caso 3: la oficina prestada a la sobrina que se niega a devolverla."),
+   S("Caso 4: la casa construida con retraso por la constructora Las Torcazas Negras."),
+   S("Compara con las respuestas narrativas de los casos 3 y 4.")]}},
+ "2026-11-16":{
+  t0:{s:[S("Tarjetas falladas + lista de fallos del domingo. Cada una: tapa, responde, destapa.")]},
+  t1:{s:[
+   S("Esquema 05: bienes, dominio, tradición, posesión, acciones reales, sucesión y responsabilidad extracontractual."),
+   S("Esquema 08: limitaciones del dominio, fideicomiso, usufructo, servidumbres y comunidad."),
+   S("Caso 5: la obra del hospital que no pudo empezar porque el terreno estaba ocupado."),
+   S("Caso 6: el crédito con fiador solidario e hipoteca sobre un inmueble que se incendió."),
+   S("Compara con las respuestas narrativas de los casos 5 y 6.")]}},
+ "2026-11-17":{
+  t0:{s:[PR("Copia este texto en un chat nuevo con Claude y responde en voz alta:","Hazme un simulacro oral de Contratación Mercantil para mi prueba de mañana. Una pregunta a la vez, como lo haría un profesor. Corrígeme según mi apunte y cita el artículo cuando corresponda. Incluye requisitos y plazos de las cuatro partes. Al final dame la lista de lo que fallé.")]},
+  t1:{s:[S("Copia los fallos del simulacro a tu hoja «Fallos Mercantil».")]},
+  t2:{s:[S("Esquema 09: lee solo los títulos y el cuadro comparativo del punto 7. Dibuja en una hoja: procedimiento → cuándo se usa → qué tiene de especial.")]}},
+ "2026-11-18":{
+  t0:{s:[S("Antes de la prueba (30 min): solo la hoja «Fallos Mercantil». Nada nuevo.")]},
+  t1:{s:[
+   PR("Después de la prueba, copia este texto en un chat nuevo con Claude:","Hazme un simulacro oral corto del Taller de integración (Civil y Procesal). Dame un caso breve y pregúntame qué acciones o excepciones corresponden, qué procedimiento se sigue y qué artículos aplican. Una pregunta a la vez. Al final dame la lista de lo que fallé."),
+   S("Copia los fallos a tu hoja «Fallos Taller».")]}},
+ "2026-11-19":{t0:{s:[
+  S("Mañana (1 h): solo la hoja «Fallos Taller». Tapa, responde en voz alta, destapa."),
+  S("Repasa en voz alta el esquema para resolver un caso: hechos → institución civil → acción → procedimiento → artículos."),
+  S("Nada nuevo.")]}}
+};
+const ING=f=>{const d=new Date(f+"T12:00:00").getDay();
+  if(f>="2026-11-14"&&d===6)return {pre:"30 a 40 min.",s:[S("Perfect English Grammar: un tema de gramática y sus ejercicios."),S("ELSA Speak: una sesión de pronunciación."),S("10 minutos de conversación por voz con tu chat de inglés con Claude, sobre tu semana.")]};
+  if(f>="2026-11-15"&&d===0)return {pre:"20 min.",s:[S("Repasa los errores de la semana en tu cuaderno."),S("Describe tu cuarto en voz alta, en inglés."),S("Escribe 2 preguntas en inglés y respóndelas.")]};
+  return {pre:"Unos 15 min. Vigila: is/am/are, el sujeto («It is cold»), to/a/an, this/these, in/on/at.",s:[S("Una lección de Duolingo."),S("En tu cuaderno de inglés, escribe 1 o 2 oraciones propias sobre tu día. Ej.: «Today I study law»."),S("Control «¿sujeto y verbo?»: subraya el sujeto y el verbo de cada oración. Si falta uno, está incompleta."),S("Anota 3 palabras nuevas de la lección, con su traducción.")]};};
+const guideFor=(f,id)=>(GUIA[f]||{})[id]||(id==="r2"?ING(f):null);
+
+/* ───────── CARITAS Y ESCALAS ───────── */
+const eye=(cx,cy,dx=0,dy=0,r=6.5,pr=3.4)=>`<circle cx="${cx}" cy="${cy}" r="${r}"/><circle cx="${cx+dx}" cy="${cy+dy}" r="${pr}" fill="currentColor" stroke="none"/>`;
+const p=d=>`<path d="${d}"/>`;
+const FACES={
+ contento:["Contento",eye(16,23,2.5)+eye(32,23,2.5)+p("M11 12Q16 9 21 12M27 12Q32 9 37 12")+p("M17 33Q24 40 31 33")],
+ tranquilo:["Tranquilo",p("M10 24Q16 19 22 24M26 24Q32 19 38 24")+p("M19 34Q24 37 29 34")],
+ motivado:["Motivado",eye(16,22,0,0,6.5,3)+eye(32,22,0,0,6.5,3)+p("M10 12L21 15M27 15L38 12")+p("M15 31H33Q33 40 24 40Q15 40 15 31Z")],
+ curioso:["Curioso",eye(16,24,-2.5)+eye(32,24,-2.5)+p("M11 16Q16 14 21 16M27 11Q32 6 37 10")+`<circle cx="26" cy="36" r="2.6"/>`],
+ cansado:["Cansado",eye(16,23,0,2)+eye(32,23,0,2)+p("M9 21H23M25 21H39")+p("M18 36H30")+p("M38 4H44L38 10H44")],
+ ansioso:["Ansioso",eye(16,23,0,0,6.5,2)+eye(32,23,0,0,6.5,2)+p("M11 14L20 12M28 12L37 14")+p("M15 36Q18 33 21 36T27 36T33 36")+p("M41 10Q44 15 41 18Q38 15 41 10Z")],
+ triste:["Triste",eye(16,24,0,2.5)+eye(32,24,0,2.5)+p("M11 15Q16 12 21 11M27 11Q32 12 37 15")+p("M18 38Q24 32 30 38")+p("M10 31Q11 35 10 36")],
+ irritado:["Irritado",eye(16,24,1.5,1)+eye(32,24,-1.5,1)+p("M9 13L21 18M27 18L39 13")+p("M17 37L31 35")],
+ confundido:["Confundido",eye(16,23,1.5)+eye(33,25,1,0,4.2,2.2)+p("M11 13Q16 10 21 13M29 17L37 16")+p("M15 36Q19 32 24 36Q29 40 33 36")],
+ aburrido:["Aburrido",eye(16,24,3,1)+eye(32,24,3,1)+p("M9 22H23M25 22H39")+p("M21 36H31")]
+};
+const faceInner=k=>`<g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">${FACES[k][1]}</g>`;
+const face=k=>`<svg viewBox="0 0 48 48" aria-hidden="true">${faceInner(k)}</svg>`;
+const BLOB="M34 3C46 3 58 10 61 22S60 47 50 55 25 64 15 57 2 41 4 28 20 3 34 3Z";
+const CUERPO=["🤕","😣","😐","🙂","💪"], MENTE=["🌫️","😵‍💫","😐","🙂","🤓"], NIVEL=["muy mal","mal","regular","bien","muy bien"];
+const emoCal=v=>v<=2?"😫":v<=4?"😕":v<=6?"😐":v<=8?"🙂":"😌";
+const emoEne=v=>v<=2?"🪫":v<=4?"😮‍💨":v<=6?"😐":v<=8?"🔋":"⚡";
+const emoEst=v=>v<=2?"😌":v<=4?"🙂":v<=6?"😐":v<=8?"😬":"🤯";
+const SCALE_FN={cal:emoCal,ene:emoEne,nEne:emoEne,nEst:emoEst};
+const MAXEMO=3;
+const emoList=(L,k)=>{const v=L[k];return (Array.isArray(v)?v:v?[v]:[]).filter(x=>FACES[x]);};
+const toMin=s=>{const m=/^(\d\d):(\d\d)$/.exec(s||"");return m?+m[1]*60+ +m[2]:null;};
+function horasDormidas(L){const a=toMin(L.dur),b=toMin(L.desp);if(a==null||b==null)return L.sueno!=null&&L.sueno!==""?+L.sueno:null;return ((b-a+1440)%1440)/60;}
+const fh=h=>h==null?"–":(Math.round(h*10)/10).toString().replace(".",",");
+
+/* ───────── ESTADO ───────── */
+const iso=d=>d.toLocaleDateString("sv-SE");
+const TODAY=iso(new Date());
+const FIRST=PLAN[0].f, LAST=PLAN[PLAN.length-1].f;
+const clampDate=f=>f<FIRST?FIRST:f>LAST?LAST:f;
+let cur=clampDate(TODAY);
+let tab="hoy";
+const logs={};           // fecha -> documento
+const dirty=new Set();   // fechas con cambios locales sin guardar
+const saving={};
+const openD={};          // qué desplegables abrió o cerró Luciano
+let db=null, mode="cargando";
+
+function dayPlan(f){const p=PLAN.find(x=>x.f===f);if(!p)return null;
+  const tasks=[...p.t.map((t,i)=>({...t,id:"t"+i})),...RUTINAS(f).map((t,i)=>({...t,id:"r"+i}))];
+  const fza=fzaOf(f);
+  if(fza){const e=SES[fza];tasks.push({a:"FZA",txt:e.n+".",min:e.dur,id:"fza"});}
+  return {...p,fza,tasks};}
+const fmt=(f,o)=>new Date(f+"T12:00:00").toLocaleDateString("es-CL",o||{weekday:"long",day:"numeric",month:"long"});
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const getLog=f=>logs[f]||(logs[f]={tareas:{},ejer:{}});
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const isOpen=(k,def)=>k in openD?openD[k]:def;
+
+/* ───────── GUARDADO ───────── */
+function setStatus(t){document.getElementById("status").textContent=t;}
+const timers={};
+function touch(f){dirty.add(f);clearTimeout(timers[f]);timers[f]=setTimeout(()=>save(f),700);setStatus("Guardando…");}
+async function save(f){
+  if(mode==="local"){try{localStorage.setItem("plan-luciano",JSON.stringify(logs));setStatus("Guardado en este teléfono ✓");}catch(e){setStatus("⚠️ No se pudo guardar: usa «Copiar mi registro» en Resumen");}dirty.delete(f);return;}
+  if(!db)return;
+  if(saving[f]){saving[f]="again";return;}
+  saving[f]=true;dirty.delete(f);
+  try{await db.doc("registro/"+f).set(JSON.parse(JSON.stringify(logs[f])));setStatus("Guardado ✓");}
+  catch(e){dirty.add(f);setStatus(e&&e.code==="quota_exceeded"?"Sin espacio para guardar":"No se pudo guardar; reintento al próximo cambio");}
+  const again=saving[f]==="again";saving[f]=false;if(again||dirty.has(f))save(f);
+}
+
+/* ───────── VISTAS ───────── */
+const vidA=(id,t)=>`<a class="vid" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">▶ ${t||"Ver video"}</a>`;
+function exHTML(f,key){
+  const s=SES[key], L=getLog(f), E=L.ejer||{};
+  return `<div class="exwrap">
+   ${s.nota?`<p class="small" style="margin:0"><b>${esc(s.nota)}</b></p>`:""}
+   ${s.test?`<ol class="tech"><li>Pesa la mochila cargada: te pesas solo, después con ella, y restas.</li><li>Haz el calentamiento.</li></ol>`:""}
+   ${s.sincal?"":`<details class="more" data-k="cal-${f}"${isOpen("cal-"+f,false)?" open":""}><summary>+ Calentamiento (4 min)</summary><ol class="tech">${CALENT.map(c=>`<li>${c}</li>`).join("")}</ol></details>`}
+   ${s.ex.map(([k,sr,rule],i)=>{const x=X[k],r=E["e"+i]||{},dk="tq-"+f+"-"+i;
+    return `<div class="ex"><div class="exfig">${FIG[k]?`<svg viewBox="0 0 120 80" aria-hidden="true">${FIG[k]}</svg>`:""}<div><b>${esc(x.n)}</b><div class="sr">${esc(sr)}</div></div></div>
+     ${rule?`<p class="small" style="margin:0">${esc(rule)}</p>`:""}
+     <details class="more" data-k="${dk}"${isOpen(dk,false)?" open":""}><summary>+ Cómo se hace${x.v?" y video":""}</summary>
+      <ul class="tech">${[["Inicio",x.i],["Movimiento",x.m],["Respiración",x.r],["Error común",x.e]].filter(z=>z[1]).map(([a,b])=>`<li><b>${a}:</b> ${esc(b)}</li>`).join("")}</ul>
+      ${x.v?vidA(x.v):""}${x.v2?vidA(x.v2[1],x.v2[0]):""}${x.v?`<div class="hint">Si el video y el plan no coinciden en algo, manda el plan.</div>`:""}</details>
+     <div class="fields">${s.test?`<label style="flex:3">Resultado<input id="er-${f}-${i}" type="text" data-act="ejr" data-f="${f}" data-i="${i}" value="${esc(r.reps||"")}"></label>`:
+      `<label>Repeticiones por serie<input id="er-${f}-${i}" type="text" inputmode="numeric" placeholder="ej. 10,9,8" data-act="ejr" data-f="${f}" data-i="${i}" value="${esc(r.reps||"")}"></label>
+      <label>Carga / variante<input id="ec-${f}-${i}" type="text" placeholder="ej. mochila 6 kg" data-act="ejc" data-f="${f}" data-i="${i}" value="${esc(r.carga||"")}"></label>`}</div></div>`;}).join("")}
+   ${s.test?`<div class="fields">${[["t_mochila","Peso de la mochila (kg)"],["t_peso","Tu peso (kg)"],["t_cintura","Cintura a la altura del ombligo (cm)"]].map(([k,l])=>`<label>${l}<input id="${k}-${f}" type="text" inputmode="decimal" data-act="tx" data-k2="${k}" data-f="${f}" value="${esc(E[k]||"")}"></label>`).join("")}</div>
+    <p class="small muted" style="margin:0">Saca también 3 fotos (frente, perfil y espalda) con la misma luz y la misma distancia. Todo queda solo en tu teléfono.</p>`:
+   `<div class="q"><span class="ql">RIR general (cuántas repeticiones te sobraban)</span>
+    <div class="rir">${[0,1,2,3,4].map(v=>`<button class="chip" data-act="rir" data-f="${f}" data-v="${v}" aria-pressed="${L.rir===v}">${v}</button>`).join("")}</div></div>
+   <ul class="rules"><li>${rirFase(f)}</li>
+    <li>Si haces todas las series en el máximo del rango y te quedan unas 2 → agrega un libro o una botella a la mochila en la sesión siguiente.</li>
+    <li>Si no llegas al mínimo, usa la variante fácil: flexión inclinada, zancada afirmado de la silla o sentadilla sin peso.</li>
+    <li>Si un día no puedes, no juntes dos sesiones: haz la siguiente que toque.</li>
+    <li>Detén el ejercicio si aparece: ${STOP.join(", ")}.</li></ul>`}
+  </div>`;
+}
+function howHTML(f,t){
+  const g=guideFor(f,t.id);if(!g)return"";
+  const P=(getLog(f).tareas[t.id]||{}).pasos||{}, k="h-"+f+"-"+t.id, d=g.s.filter((_,i)=>P[i]).length;
+  return `<details class="how" data-k="${k}"${isOpen(k,false)?" open":""}><summary>→ Cómo hacerlo <span class="muted">· ${d} de ${g.s.length}</span></summary>
+   ${g.pre?`<p class="hint">${esc(g.pre)}</p>`:""}${g.blk?`<p class="hint">${BLOQUE}</p>`:""}
+   <ul class="steps">${g.s.map((x,i)=>`<li class="step${P[i]?" done":""}"><button class="ck" data-act="paso" data-f="${f}" data-id="${t.id}" data-i="${i}" aria-pressed="${!!P[i]}" aria-label="Marcar paso ${i+1}">${P[i]?"✓":""}</button>
+    <div class="sx">${x.b?`<b>${esc(x.b)}</b>`:""}${x.q?`<span class="qq">${esc(x.q)}</span>`:""}${x.p?`<div class="prompt">${esc(x.p)}</div><button class="copy" data-act="copy" data-txt="${esc(x.p)}">📋 Copiar texto</button>`:""}</div></li>`).join("")}</ul>
+   ${d===g.s.length?`<p class="hint">Todos los pasos listos: marca la tarea como hecha.</p>`:""}</details>`;
+}
+function taskHTML(f,t){
+  const L=getLog(f).tareas[t.id]||{}, st=L.estado||"";
+  const ar=AREAS[t.a];
+  const exK="ex-"+f, moreK="m-"+f+"-"+t.id;
+  return `<div class="task" data-st="${st}" style="--area:var(--a-${ar[1]});--pill:var(--p-${ar[1]})">
+   <div class="thead"><span class="tag">${ar[0]}</span><span class="dur meta">${t.min?"~"+t.min+" min":""}</span></div>
+   <p class="ttxt">${esc(t.txt)}</p>
+   ${howHTML(f,t)}
+   ${t.id==="fza"?`<details class="exd" data-k="${exK}"${isOpen(exK,false)?" open":""}><summary>→ Ver ejercicios y anotar series</summary>${exHTML(f,fzaOf(f))}</details>`:""}
+   <div class="btns" role="group" aria-label="Estado">
+    ${[["hecho","✓ Hecho"],["medio","½ A medias"],["no","✗ No"]].map(([v,l])=>`<button class="st" data-act="st" data-f="${f}" data-id="${t.id}" data-v="${v}" aria-pressed="${st===v}">${l}</button>`).join("")}
+   </div>
+   <details class="more" data-k="${moreK}"${isOpen(moreK,!!(L.min||L.nota))?" open":""}><summary>+ Minutos reales y nota</summary>
+    <div class="fields">
+     <label>Minutos reales<input id="mi-${f}-${t.id}" type="number" inputmode="numeric" min="0" data-act="min" data-f="${f}" data-id="${t.id}" value="${esc(L.min||"")}"></label>
+     <label style="flex:3">Nota (qué faltó, qué falló)<input id="no-${f}-${t.id}" type="text" data-act="nota" data-f="${f}" data-id="${t.id}" value="${esc(L.nota||"")}"></label>
+    </div></details>
+  </div>`;
+}
+function progressOf(f){const p=dayPlan(f);if(!p)return[0,0];const L=getLog(f).tareas;let s=0;p.tasks.forEach(t=>{const e=(L[t.id]||{}).estado;s+=e==="hecho"?1:e==="medio"?.5:0;});return[s,p.tasks.length];}
+
+function checkinDone(L){return !!(L.dur&&L.desp&&L.cal!=null&&L.ene!=null&&L.cuerpo&&L.mente&&(emoList(L,"emo").length||L.emoN));}
+const emoNames=(L,k)=>emoList(L,k).map(x=>FACES[x][0].toLowerCase()).join(", ");
+function checkinSummary(L){
+  const parts=[];const h=horasDormidas(L);
+  if(h!=null)parts.push("😴 "+fh(h)+" h");
+  if(L.cal!=null)parts.push("calidad "+L.cal);
+  if(L.ene!=null)parts.push("energía "+L.ene);
+  if(L.cuerpo)parts.push("cuerpo "+CUERPO[L.cuerpo-1]);
+  if(L.mente)parts.push("mente "+MENTE[L.mente-1]);
+  const e=emoNames(L,"emo");if(e)parts.push(e);else if(L.emoN)parts.push(L.emoN);
+  return parts.length?parts.join(" · "):"Sin registrar todavía";
+}
+function scaleHTML(key,label,lo,hi,v,fn){
+  return `<div class="q scale"><div class="sh"><span class="ql">${label}</span><output id="o-${key}">${v==null?"—":v+" "+fn(v)}</output></div>
+   <input type="range" min="0" max="10" step="1" id="${key}-${cur}" data-act="${key}" class="${v==null?"unset":""}" value="${v??5}" aria-label="${label}, de 0 a 10">
+   <div class="ends"><span>0 · ${lo}</span><span>10 · ${hi}</span></div></div>`;
+}
+const chipsHTML=(act,L,arr,label,nk,ph)=>`<div class="q"><span class="ql">${label}</span>
+  <div class="chips">${arr.map((e,i)=>`<button class="chip" data-act="${act}" data-v="${i+1}" aria-pressed="${L[act]===i+1}" aria-label="${label} ${NIVEL[i]}">${e}</button>`).join("")}</div>
+  <input id="${nk}-${cur}" type="text" data-act="${nk}" placeholder="${ph}" value="${esc(L[nk]||"")}"></div>`;
+const emoPicker=(act,L,label,nk)=>{const sel=emoList(L,act);return `<div class="q"><span class="ql">${label} <span class="muted small">(hasta ${MAXEMO})</span></span>
+  <div class="emos">${Object.keys(FACES).map(k=>`<button class="emo" data-act="${act}" data-v="${k}" aria-pressed="${sel.includes(k)}">${face(k)}${FACES[k][0]}</button>`).join("")}</div>
+  <input id="${nk}-${cur}" type="text" data-act="${nk}" placeholder="¿Otra? Escríbela aquí" value="${esc(L[nk]||"")}"></div>`;};
+const blobFace=(k,fill)=>`<svg class="sun" viewBox="0 0 64 64" aria-hidden="true"><path d="${BLOB}" fill="${fill}"/><g transform="translate(8 9)">${faceInner(k)}</g></svg>`;
+function checkinHTML(){
+  const L=getLog(cur), done=checkinDone(L), k="ci-"+cur;
+  return `<details class="checkin" data-k="${k}"${isOpen(k,!done)?" open":""}>
+   <summary>${blobFace(emoList(L,"emo")[0]||"tranquilo","var(--sun)")}<span class="st-txt"><h3>Check-in de la mañana</h3><span class="meta">${esc(checkinSummary(L))}</span></span><span class="chev" aria-hidden="true">›</span></summary>
+   <div class="ci-body">
+    <div class="ci-block"><h4>🌙 Sueño</h4>
+     <div class="fields" style="margin:0">
+      <label>Me dormí aprox. a las<input id="dur-${cur}" type="time" data-act="dur" value="${esc(L.dur||"")}"></label>
+      <label>Desperté a las<input id="desp-${cur}" type="time" data-act="desp" value="${esc(L.desp||"")}"></label>
+     </div>
+     <div class="slept" id="slept">${horasDormidas(L)!=null?"Dormiste unas "+fh(horasDormidas(L))+" horas":"Las horas dormidas se calculan solas"}</div>
+     ${scaleHTML("cal","Calidad del descanso","pésimo","perfecto",L.cal,emoCal)}
+     ${scaleHTML("ene","Energía al despertar","sin batería","a tope",L.ene,emoEne)}
+    </div>
+    <div class="ci-block"><h4>🧭 Estado</h4>
+     ${chipsHTML("cuerpo",L,CUERPO,"¿Cómo está mi cuerpo?","cuerpoN","Opcional: cuello tenso, me duele la espalda…")}
+     ${chipsHTML("mente",L,MENTE,"¿Cómo está mi mente?","menteN","Opcional: dispersa, con ganas, preocupada por…")}
+     ${emoPicker("emo",L,"Emociones que describan la mañana","emoN")}
+    </div>
+   </div></details>`;
+}
+function nightDone(L){return L.nEne!=null&&L.nEst!=null&&!!L.nCuerpo&&!!L.nMente;}
+function nightSummary(L){const p=[];
+  if(L.nEne!=null)p.push("energía "+L.nEne);if(L.nEst!=null)p.push("estrés "+L.nEst);
+  if(L.nCuerpo)p.push("cuerpo "+CUERPO[L.nCuerpo-1]);if(L.nMente)p.push("mente "+MENTE[L.nMente-1]);
+  const e=emoNames(L,"nEmo");if(e)p.push(e);
+  return p.length?p.join(" · "):"Al final del día, 1 minuto";}
+function nightHTML(){
+  const L=getLog(cur), k="nc-"+cur, late=cur<TODAY||(cur===TODAY&&new Date().getHours()>=19);
+  return `<details class="checkin night" data-k="${k}"${isOpen(k,late&&!nightDone(L))?" open":""}>
+   <summary>${blobFace(emoList(L,"nEmo")[0]||"tranquilo","var(--p-suc)")}<span class="st-txt"><h3>Check-in de la noche</h3><span class="meta">${esc(nightSummary(L))}</span></span><span class="chev" aria-hidden="true">›</span></summary>
+   <div class="ci-body">
+    <div class="ci-block"><h4>🌙 Cómo terminó el día</h4>
+     ${scaleHTML("nEne","Energía al final del día","sin batería","a tope",L.nEne,emoEne)}
+     ${scaleHTML("nEst","Estrés del día","nada","al máximo",L.nEst,emoEst)}
+     ${chipsHTML("nCuerpo",L,CUERPO,"¿Cómo está mi cuerpo?","nCuerpoN","Opcional")}
+     ${chipsHTML("nMente",L,MENTE,"¿Cómo está mi mente?","nMenteN","Opcional")}
+     ${emoPicker("nEmo",L,"Emociones del día","nEmoN")}
+    </div>
+    <div class="ci-block"><h4>✍️ En una línea</h4><div class="txt3">
+     <label>✅ Algo que salió bien<input id="nBien-${cur}" type="text" data-act="nBien" value="${esc(L.nBien||"")}"></label>
+     <label>🧱 Qué me trabó<input id="nTrabo-${cur}" type="text" data-act="nTrabo" value="${esc(L.nTrabo||"")}"></label>
+     <label>🌅 Lo primero que haré mañana<input id="nMan-${cur}" type="text" data-act="nMan" value="${esc(L.nMan||"")}"></label>
+    </div></div>
+   </div></details>`;
+}
+
+function viewHoy(){
+  const p=dayPlan(cur), L=getLog(cur), d=new Date(cur+"T12:00:00").getDay();
+  const [s,n]=progressOf(cur);
+  const agenda=[...(CLASES[d]?[CLASES[d]]:[]),...p.agenda].sort();
+  return `
+  <div class="daynav"><button class="iconbtn" data-act="prev" aria-label="Día anterior">‹</button>
+   <div class="title"><h2>${cap(fmt(cur))}</h2><div class="meta">${cur===TODAY?"Hoy":cur<TODAY?"Día pasado":"Día que viene"}${p.prov?" · tramo provisional, puede cambiar":""}</div></div>
+   <button class="iconbtn" data-act="next" aria-label="Día siguiente">›</button></div>
+  ${p.exam?`<div class="exam">${esc(p.exam)}</div>`:""}
+  ${agenda.length?`<ul class="agenda">${agenda.map(a=>`<li>${esc(a)}</li>`).join("")}</ul>`:""}
+  ${p.nota?`<div class="nota">${esc(p.nota)}</div>`:""}
+  ${checkinHTML()}
+  <div class="section-label"><h3>Tareas del día</h3><span class="meta">${String(s).replace(".",",")} de ${n}</span></div>
+  <div class="prog" aria-hidden="true"><i style="width:${n?Math.round(s/n*100):0}%"></i></div>
+  <div class="tasks">${p.tasks.map(t=>taskHTML(cur,t)).join("")}</div>
+  ${nightHTML()}
+  <div class="card"><h3>¿Surgió algo hoy?</h3>
+   <label class="small muted" for="imp-${cur}">Imprevistos, cambios de fecha, tareas nuevas</label>
+   <textarea id="imp-${cur}" data-act="imprevisto" placeholder="Ej.: me movieron la prueba; hoy tuve ayudantía de 3 h">${esc(L.imprevisto||"")}</textarea>
+  </div>`;
+}
+
+function viewSemana(){
+  const base=new Date(cur+"T12:00:00");const dow=(base.getDay()+6)%7;base.setDate(base.getDate()-dow);
+  const days=[...Array(7)].map((_,i)=>{const x=new Date(base);x.setDate(base.getDate()+i);return iso(x);});
+  const prevW=new Date(base);prevW.setDate(base.getDate()-7);const nextW=new Date(base);nextW.setDate(base.getDate()+7);
+  return `<div class="daynav"><button class="iconbtn" data-act="goto" data-f="${clampDate(iso(prevW))}" aria-label="Semana anterior">‹</button>
+   <div class="title"><h2>Semana del ${fmt(days[0],{day:"numeric",month:"long"})}</h2><div class="meta">Toca un día para registrarlo</div></div>
+   <button class="iconbtn" data-act="goto" data-f="${clampDate(iso(nextW))}" aria-label="Semana siguiente">›</button></div>
+  <div class="week">${days.map(f=>{const p=dayPlan(f);if(!p)return"";const Lg=getLog(f),L=Lg.tareas;
+    const areas=[...new Set(p.t.map(t=>AREAS[t.a][0]))].join(" · ");
+    return `<button class="wday${f===TODAY?" today":""}" data-act="open" data-f="${f}">
+     <span class="d">${cap(fmt(f,{weekday:"short"})).replace(".","")}<small>${fmt(f,{day:"numeric",month:"short"}).replace(".","")}</small></span>
+     <span class="info"><span>${p.exam?`<span class="pill">Prueba</span> `:""}${p.prov?`<span class="pill prov">Provisional</span> `:""}${esc(areas)}${p.fza?" · ejercicio":""}</span>
+     <span class="dots">${p.tasks.map(t=>`<i class="dot ${(L[t.id]||{}).estado||""}"></i>`).join("")}</span></span>
+     ${emoList(Lg,"emo")[0]?`<span class="face" title="${FACES[emoList(Lg,"emo")[0]][0]}">${face(emoList(Lg,"emo")[0])}</span>`:""}</button>`;}).join("")}</div>
+  <p class="meta">Verde: hecho · amarillo: a medias · rojo: no hecho · vacío: sin marcar.</p>`;
+}
+
+function viewResumen(){
+  const until=TODAY<FIRST?FIRST:TODAY>LAST?LAST:TODAY;
+  const past=PLAN.filter(p=>p.f<=until).map(p=>dayPlan(p.f));
+  const by={};let tot=0,done=0,mins=0;const sl=[],ca=[],en=[],cu=[],me=[],ne=[],ns=[],emos={};
+  past.forEach(p=>{const L=getLog(p.f);p.tasks.forEach(t=>{const e=(L.tareas[t.id]||{});const v=e.estado==="hecho"?1:e.estado==="medio"?.5:0;
+    (by[t.a]=by[t.a]||[0,0]);by[t.a][0]+=v;by[t.a][1]++;tot++;done+=v;mins+=+e.min||0;});
+    const h=horasDormidas(L);if(h!=null)sl.push(h);
+    if(L.cal!=null)ca.push(L.cal);if(L.ene!=null)en.push(L.ene);if(L.cuerpo)cu.push(L.cuerpo);if(L.mente)me.push(L.mente);
+    if(L.nEne!=null)ne.push(L.nEne);if(L.nEst!=null)ns.push(L.nEst);
+    [...emoList(L,"emo"),...emoList(L,"nEmo")].forEach(k=>emos[k]=(emos[k]||0)+1);});
+  const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+  const fa=a=>{const v=avg(a);return v==null?"–":fh(v);};
+  const pct=tot?Math.round(done/tot*100):0;
+  const imp=PLAN.filter(p=>logs[p.f]&&logs[p.f].imprevisto).slice(-6).reverse();
+  const top=Object.entries(emos).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const cuA=avg(cu),meA=avg(me);
+  return `<h2>Desde el 2 de noviembre hasta hoy</h2>
+  <div class="stats">
+   <div class="card"><span class="meta">Cumplido</span><span class="big">${pct}%</span></div>
+   <div class="card"><span class="meta">Sueño promedio</span><span class="big">${fa(sl)}</span><span class="small">horas</span></div>
+   <div class="card"><span class="meta">Calidad del descanso</span><span class="big">${fa(ca)}</span><span class="small">de 10</span></div>
+   <div class="card"><span class="meta">Energía al despertar</span><span class="big">${fa(en)}</span><span class="small">de 10</span></div>
+  </div>
+  <div class="card"><h3>Cómo vienes</h3>
+   <div>Mañanas · cuerpo: ${cuA?CUERPO[Math.round(cuA)-1]+" "+NIVEL[Math.round(cuA)-1]:"–"} · mente: ${meA?MENTE[Math.round(meA)-1]+" "+NIVEL[Math.round(meA)-1]:"–"}</div>
+   <div>Noches · energía: ${fa(ne)} · estrés: ${fa(ns)} <span class="muted small">(de 10)</span></div>
+   ${top.length?`<div class="meta">Emociones que más se repiten</div><div class="topemo">${top.map(([k,n])=>`<div>${face(k)}${FACES[k][0]} · ${n}</div>`).join("")}</div>`:'<p class="muted" style="margin:0">Cuando hagas los check-in, aquí verás tus emociones más frecuentes.</p>'}
+  </div>
+  <div class="card"><h3>Por materia</h3><div class="bars">${Object.keys(AREAS).filter(a=>by[a]).map(a=>{const[v,n]=by[a];const r=Math.round(v/n*100);
+    return `<div class="bar"><span>${AREAS[a][0].split(" (")[0]}</span><span class="t"><i style="width:${r}%;background:var(--a-${AREAS[a][1]})"></i></span><span class="n">${r}%</span></div>`;}).join("")||'<p class="muted">Aún no hay días registrados.</p>'}</div>
+   <p class="meta" style="margin:0">Hecho cuenta 1, a medias cuenta ½. Minutos reales registrados: ${mins}.</p></div>
+  <div class="card"><h3>Imprevistos anotados</h3>${imp.length?imp.map(p=>`<div><b>${cap(fmt(p.f,{weekday:"short",day:"numeric",month:"short"}))}:</b> ${esc(logs[p.f].imprevisto)}</div>`).join(""):'<p class="muted" style="margin:0">Ninguno todavía. Cuando surja algo, anótalo al final de «Hoy» y lo vemos en el chat para reordenar el plan.</p>'}</div>
+  <div class="card"><h3>Respaldo y envío a Claude</h3>
+   <p class="small" style="margin:0">Tus registros viven solo en este teléfono. Una vez por semana, o cuando quieras reajustar el plan, toca el botón y pega el texto en el chat de Claude.</p>
+   <button class="st" style="background:var(--sun);color:var(--on-vivid);border-color:var(--ink)" data-act="export">📋 Copiar mi registro</button>
+   <textarea id="expTxt" readonly hidden></textarea>
+   <span class="meta" id="expMsg"></span>
+   <details class="more" data-k="imp"${isOpen("imp",false)?" open":""}><summary>+ Importar un registro (cambio de teléfono o de versión)</summary>
+    <div class="fields" style="flex-direction:column"><textarea id="impTxt" placeholder="Pega aquí el texto copiado"></textarea>
+    <button class="st" data-act="import">Importar</button><span class="meta" id="impMsg"></span></div></details>
+  </div>`;
+}
+
+const GUIA_TAB=`
+ <h2>Cómo estudiar y entrenar</h2>
+ <p class="nota" style="margin:0">La pestaña «Hoy» te dice qué toca; aquí está el método completo. Cada tarea trae su «→ Cómo hacerlo».</p>
+ <div class="card gcard"><h3>📚 El bloque de estudio</h3>
+  <details open><summary>Antes de empezar (2 min, una sola vez)</summary><ul>
+   <li>Celular en «No molestar» y boca abajo.</li><li>Sobre la mesa: el material del día, una hoja en blanco y un lápiz de otro color.</li><li>Temporizador listo en 15 minutos.</li></ul></details>
+  <details open><summary>Cada bloque (unos 22 min)</summary><ol>
+   <li><b>Pregunta (1 min).</b> Copia en la hoja las preguntas del bloque. Lees para responderlas, no para «pasar la vista».</li>
+   <li><b>Leer (15 min, con temporizador).</b> Solo las secciones del bloque. Si suena a mitad de un párrafo, terminas el párrafo y paras.</li>
+   <li><b>Cerrar y escribir (4 min).</b> Cierra el material y responde de memoria, en frases cortas o flechas (→). No importa que salga incompleto: eso es lo que te hace recordar.</li>
+   <li><b>Verificar (3 min).</b> Abre el material y corrige con el lápiz de otro color.</li>
+   <li><b>Anotar el fallo.</b> Lo corregido va a tu hoja de fallos, en una línea.</li>
+   <li><b>Pausa (3 a 5 min).</b> De pie. Caben la mecanografía, el registro de comidas o agua. Redes sociales no: alargan la pausa.</li></ol></details>
+  <details><summary>Si te quedas atrás</summary><ul>
+   <li>Si no alcanzas el último bloque → pásalo al próximo repaso corto, no al día siguiente completo.</li>
+   <li>Si te distraes a mitad de la lectura → para, lee la pregunta en voz alta y sigue.</li>
+   <li>En la app: ✓ si hiciste todos los bloques, ½ si hiciste algunos.</li></ul></details>
+ </div>
+ <div class="card gcard"><h3>🧰 Herramientas</h3>
+  <details><summary>La hoja de fallos</summary><ul>
+   <li>Una hoja por ramo: «Fallos Sucesorio», «Fallos Tributario», «Fallos Mercantil», «Fallos Taller».</li>
+   <li>Cada fallo es una línea: <b>qué creía → qué es en verdad → dónde está</b> (sección o artículo).</li>
+   <li>El día antes de cada prueba solo repasas esta hoja. Por eso tiene que estar al día.</li></ul></details>
+  <details><summary>Repaso 1-3-7</summary><ul>
+   <li>Lo de hoy se repasa al día siguiente, a los 3 días y a los 7 días.</li>
+   <li>Repasar = tapar el material y responder tus preguntas del bloque de memoria. Solo después miras.</li></ul></details>
+  <details><summary>Simulacro oral con Claude</summary><ol>
+   <li>Abre un chat nuevo con Claude en el proyecto de estudio.</li><li>Copia el texto del simulacro que trae la tarea de ese día.</li>
+   <li>Responde en voz alta antes de escribir: la prueba es oral.</li><li>Al final, la lista de fallos va a tu hoja de fallos.</li></ol></details>
+ </div>
+ <div class="card gcard"><h3>🇬🇧 Ruta de inglés</h3>
+  <ul><li>Del 2 al 9: todos los días la versión corta (unos 15 min).</li><li>Desde el 10: lunes a viernes la corta; sábado y domingo, la suya.</li><li>Meta: 5 de 7 días a la semana.</li></ul>
+  <details><summary>Errores a vigilar</summary><ul>
+   <li>Olvidar is / am / are → «I am tired», no «I tired».</li><li>Olvidar «to», «a» o «an».</li><li>Omitir el sujeto → «It is cold», no «Is cold».</li>
+   <li>Confundir this / these.</li><li>Confundir in / on / at.</li></ul></details>
+ </div>
+ <div class="card gcard"><h3>💪 Ejercicio en casa</h3>
+  <details open><summary>La semana</summary><ul>
+   <li>Mar 3: sesión suave · sáb 7: test de nivel en casa · lun 9: nada.</li>
+   <li>Desde el mar 10: lun espalda + bíceps · mar piernas · mié pecho + tríceps + hombro · jue core + postura · vie espalda + brazos + flexiones · sáb caminata + cuello · dom descanso.</li>
+   <li>Cada sesión dura unos 30 minutos y la hora es libre.</li><li>Si un día no puedes, no juntes dos sesiones: haz la siguiente que toque.</li></ul></details>
+  <details><summary>Peso de la mochila</summary><ul>
+   <li>1 litro de agua pesa 1 kg; un libro grueso de Derecho, entre 1 y 1,5 kg.</li>
+   <li>Para saber cuánto pesa: te pesas con ella y sin ella, y restas.</li>
+   <li>Partida: remo con dos manos 5 a 7 kg · remo con una mano 4 a 6 · peso muerto rumano 6 a 8 · curl 2 a 4 · tríceps 2 a 4 · press de hombros 3 a 5.</li>
+   <li>Sentadilla y zancada, primero sin peso: la mochila entra cuando hagas 15 repeticiones con 2 RIR. Flexiones sin mochila hasta pasar de 15.</li>
+   <li>Para subir: 1 a 1,5 kg (en curl, tríceps y hombros, 0,5 a 1 kg).</li>
+   <li>Ajusta las dos tiras, lo pesado al fondo y rellena con ropa. Revisa las costuras antes de pasar de 8 kg.</li></ul></details>
+  <details><summary>Esfuerzo (RIR) y progresión</summary><ul>
+   <li>RIR = cuántas repeticiones más podrías haber hecho.</li>
+   <li>Semanas 1 y 2 (10 al 22 de noviembre): técnica, con 3 RIR.</li>
+   <li>Semanas 3 y 4: 2 RIR, sumando 1 repetición por serie cada semana.</li>
+   <li>Semanas 5 a 8: 1-2 RIR en los ejercicios grandes.</li>
+   <li>Si haces todas las series en el máximo del rango y te quedan unas 2 → agrega un libro o una botella. Es normal que bajen las repeticiones.</li>
+   <li>No llegues al fallo en las semanas 1 a 4, y nunca en los ejercicios de cuello.</li></ul></details>
+  <details><summary>Recuperación y proteína</summary><ul>
+   <li>Si un músculo sigue muy adolorido el día de su sesión, haz 1 serie menos por ejercicio.</li>
+   <li>Duerme lo más cerca posible de 7 horas.</li>
+   <li>Proteína: unos 105 g al día repartidos en 3 o 4 comidas (huevos, legumbres, leche, yogur, atún, pollo).</li></ul></details>
+  <details><summary>Cuello, hombros y pecho: seguridad</summary><ul>
+   <li>Detén cualquier ejercicio si aparece dolor agudo o que aumenta, hormigueo, debilidad, mareo o dolor que baja al brazo. Si se repite → kinesiólogo o médico.</li>
+   <li>No se usan puentes de cuello, peso sobre la cabeza ni movimientos bruscos del cuello.</li>
+   <li>Si notas un tejido duro bajo el pezón, dolor o diferencias entre un lado y otro, conviene una consulta médica.</li></ul></details>
+ </div>`;
+function mascot(){
+  const [s,n]=progressOf(cur);const r=n?s/n:0;
+  const k=r>=1?"motivado":r>=.5?"contento":r>0?"tranquilo":"curioso";
+  document.getElementById("mascot").innerHTML=`<path d="${BLOB}" fill="var(--sun)"/><circle cx="58" cy="8" r="3" fill="var(--ink)"/><circle cx="6" cy="54" r="2" fill="var(--ink)"/><g transform="translate(8 9)">${faceInner(k)}</g>`;
+}
+const TITLES={hoy:"Hoy",semana:"Semana",guia:"Guía",resumen:"Resumen"};
+function render(){
+  const v=document.getElementById("view");
+  const focusId=document.activeElement&&document.activeElement.id;
+  v.innerHTML=tab==="hoy"?viewHoy():tab==="semana"?viewSemana():tab==="guia"?GUIA_TAB:viewResumen();
+  document.getElementById("viewTitle").textContent=TITLES[tab];
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.dataset.tab===tab?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current"));
+  mascot();
+  if(focusId){const el=document.getElementById(focusId);if(el&&el!==document.activeElement){el.focus();}}
+}
+
+/* ───────── EVENTOS ───────── */
+const view=document.getElementById("view");
+document.querySelector("nav.tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;tab=b.dataset.tab;try{history.replaceState(null,"","#"+tab);}catch(_){}render();window.scrollTo(0,0);});
+view.addEventListener("toggle",e=>{const d=e.target;if(d.dataset&&d.dataset.k)openD[d.dataset.k]=d.open;},true);
+function copyText(txt,btn){
+  const ok=()=>{const o=btn.textContent;btn.textContent="Copiado ✓";setTimeout(()=>{btn.textContent=o;},1800);};
+  const fallback=()=>{const ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");ok();}catch(e){btn.textContent="Mantén presionado el texto para copiarlo";}ta.remove();};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,fallback);else fallback();
+}
+view.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]");if(!b)return;const a=b.dataset.act;
+  if(a==="prev"||a==="next"){const i=PLAN.findIndex(p=>p.f===cur);const j=Math.max(0,Math.min(PLAN.length-1,i+(a==="next"?1:-1)));cur=PLAN[j].f;render();return;}
+  if(a==="goto"){cur=b.dataset.f;render();return;}
+  if(a==="open"){cur=b.dataset.f;tab="hoy";render();window.scrollTo(0,0);return;}
+  if(a==="st"){const L=getLog(b.dataset.f);const t=L.tareas[b.dataset.id]=L.tareas[b.dataset.id]||{};t.estado=t.estado===b.dataset.v?"":b.dataset.v;touch(b.dataset.f);render();return;}
+  if(a==="paso"){const L=getLog(b.dataset.f);const t=L.tareas[b.dataset.id]=L.tareas[b.dataset.id]||{};t.pasos=t.pasos||{};const i=b.dataset.i;
+    if(t.pasos[i])delete t.pasos[i];else t.pasos[i]=1;touch(b.dataset.f);render();return;}
+  if(a==="copy"){copyText(b.dataset.txt,b);return;}
+  if(a==="rir"){const L=getLog(b.dataset.f);const v=+b.dataset.v;L.rir=L.rir===v?null:v;touch(b.dataset.f);render();return;}
+  if(a==="cuerpo"||a==="mente"||a==="nCuerpo"||a==="nMente"){const L=getLog(cur);const v=+b.dataset.v;L[a]=L[a]===v?null:v;touch(cur);render();return;}
+  if(a==="emo"||a==="nEmo"){const L=getLog(cur);const sel=emoList(L,a),k=b.dataset.v;
+    if(sel.includes(k))L[a]=sel.filter(x=>x!==k);
+    else if(sel.length>=MAXEMO){setStatus("Máximo "+MAXEMO+" emociones: quita una para elegir otra");return;}
+    else L[a]=[...sel,k];
+    touch(cur);render();return;}
+  if(SCALE_FN[a]&&b.classList.contains("unset"))setScale(b);
+  if(a==="export"){const clean={};Object.keys(logs).sort().forEach(k=>{if(PLAN.some(p=>p.f===k))clean[k]=logs[k];});
+    const txt="REGISTRO PLAN LUCIANO "+TODAY+"\n"+JSON.stringify(clean);
+    const ta=document.getElementById("expTxt"),msg=document.getElementById("expMsg");ta.value=txt;ta.hidden=false;
+    const fallback=()=>{ta.focus();ta.select();try{document.execCommand("copy");msg.textContent="Copiado ✓ Pégalo en el chat de Claude.";}catch(e){msg.textContent="Mantén presionado el texto → Seleccionar todo → Copiar.";}};
+    if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(()=>{msg.textContent="Copiado ✓ Pégalo en el chat de Claude.";},fallback);else fallback();return;}
+  if(a==="import"){const msg=document.getElementById("impMsg");try{const raw=document.getElementById("impTxt").value;const data=JSON.parse(raw.slice(raw.indexOf("{")));
+    if(!data||typeof data!=="object")throw 0;let n=0;Object.keys(data).forEach(k=>{if(/^\d{4}-\d\d-\d\d$/.test(k)&&data[k]&&typeof data[k]==="object"){logs[k]=data[k];n++;}});
+    if(!n)throw 0;try{localStorage.setItem("plan-luciano",JSON.stringify(logs));}catch(e){}render();setStatus("Importados "+n+" días ✓");}
+    catch(e){msg.textContent="Ese texto no parece un registro de esta app.";}return;}
+});
+function setScale(el){const L=getLog(cur),a=el.dataset.act,v=+el.value;L[a]=v;el.classList.remove("unset");
+  document.getElementById("o-"+a).textContent=v+" "+SCALE_FN[a](v);touch(cur);}
+view.addEventListener("input",e=>{
+  const el=e.target,a=el.dataset.act;if(!a)return;
+  if(a==="min"||a==="nota"){const L=getLog(el.dataset.f);const t=L.tareas[el.dataset.id]=L.tareas[el.dataset.id]||{};t[a]=el.value;touch(el.dataset.f);return;}
+  if(a==="ejr"||a==="ejc"){const L=getLog(el.dataset.f);L.ejer=L.ejer||{};const k="e"+el.dataset.i;L.ejer[k]=L.ejer[k]||{};L.ejer[k][a==="ejr"?"reps":"carga"]=el.value;touch(el.dataset.f);return;}
+  if(a==="tx"){const L=getLog(el.dataset.f);L.ejer=L.ejer||{};L.ejer[el.dataset.k2]=el.value;touch(el.dataset.f);return;}
+  if(SCALE_FN[a]){setScale(el);return;}
+  if(a==="import")return;
+  const L=getLog(cur);
+  L[a]=el.value;
+  if(a==="dur"||a==="desp"){const h=horasDormidas(L);document.getElementById("slept").textContent=h!=null?"Dormiste unas "+fh(h)+" horas":"Las horas dormidas se calculan solas";}
+  touch(cur);
+});
+
+/* ───────── ARRANQUE ───────── */
+const h=(location.hash||"").slice(1);if(TITLES[h])tab=h;
+render();
+let storageOK=true;
+try{localStorage.setItem("__t","1");localStorage.removeItem("__t");}catch(e){storageOK=false;}
+mode="local";
+try{Object.assign(logs,JSON.parse(localStorage.getItem("plan-luciano")||"{}"));}catch(e){}
+setStatus(storageOK?"Guardado en este teléfono":"⚠️ Este teléfono no deja guardar así: al final del día usa «Copiar mi registro» en Resumen");
+render();
+if("serviceWorker" in navigator&&location.protocol==="https:"){navigator.serviceWorker.register("sw.js").catch(()=>{});}
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist();}catch(e){}
+</script>
+
+</html>
