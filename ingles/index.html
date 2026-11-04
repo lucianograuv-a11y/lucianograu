@@ -107,7 +107,7 @@ nav.tabs button[aria-current="page"] span{background:var(--acc);color:var(--on-v
 .empty{color:var(--muted);margin:0}
 </style></head><body>
 <div class="wrap">
- <div class="top"><div><div class="meta caps">Mi cuaderno de inglés</div><h1 id="title">Hoy</h1><div class="meta" id="status"></div></div>
+ <div class="top"><div><div class="meta caps">Mi cuaderno de inglés · desde el 2 nov</div><h1 id="title">Hoy</h1><div class="meta" id="status"></div></div>
   <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 10Q8 4 14 4H50Q56 4 56 10V38Q56 44 50 44H28L16 56V44H14Q8 44 8 38Z" fill="var(--acc)" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/><text x="32" y="32" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="20" fill="#1c1a17">Aa</text></svg></div>
  <main id="view"></main>
 </div>
@@ -140,7 +140,8 @@ const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const fmt=(f,o)=>new Date(f+"T12:00:00").toLocaleDateString("es-CL",o||{weekday:"long",day:"numeric",month:"long"});
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const addDays=(f,n)=>{const d=new Date(f+"T12:00:00");d.setDate(d.getDate()+n);return iso(d);};
-let tab="hoy", cur=TODAY, q="";
+const FIRST="2026-11-02";   // el cuaderno parte el lunes 2 de noviembre, igual que «Plan»
+let tab="hoy", cur=TODAY<FIRST?FIRST:TODAY, q="";
 const openD={};const isOpen=(k,def)=>k in openD?openD[k]:def;
 
 /* ───────── VOZ ───────── */
@@ -184,7 +185,7 @@ function autoWarn(t){
 
 /* ───────── VISTAS ───────── */
 function daynav(){
-  return `<div class="daynav"><button class="icon" data-act="day" data-n="-1" aria-label="Día anterior">‹</button>
+  return `<div class="daynav"><button class="icon" data-act="day" data-n="-1" aria-label="Día anterior"${cur<=FIRST?' disabled style="opacity:.3"':""}>‹</button>
    <div class="t"><h2>${cap(fmt(cur))}</h2><div class="meta">${cur===TODAY?"Hoy":cur<TODAY?"Día pasado":"Día que viene"}</div></div>
    <button class="icon" data-act="day" data-n="1" aria-label="Día siguiente">›</button></div>`;
 }
@@ -357,7 +358,7 @@ view.addEventListener("click",e=>{
   if(a==="say"){speak(b.dataset.t);return;}
   if(a==="trynew"){const w=val("nw");if(w)speak(w);return;}
   if(a==="voz"){D.voz=b.dataset.v;save();render();return;}
-  if(a==="day"){cur=addDays(cur,+b.dataset.n);render();return;}
+  if(a==="day"){const d=addDays(cur,+b.dataset.n);cur=d<FIRST?FIRST:d;render();return;}
   if(a==="morew"){openD.addw=true;render();return;}
   if(a==="addw"){const w=val("nw");if(!w){document.getElementById("nw").focus();return;}
     D.vocab.push({id:uid(),d:cur,w,s:val("ns"),o:val("no")});["nw","ns","no"].forEach(id=>{document.getElementById(id).value="";});

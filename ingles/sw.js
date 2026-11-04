@@ -1,5 +1,5 @@
-// versión d410480d
-const C="ingles-d410480d";
+// versión 826df76c
+const C="ingles-826df76c";
 const CORE=["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(CORE)));self.skipWaiting();});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith("ingles-")&&k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
