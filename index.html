@@ -169,6 +169,11 @@ a.vid{display:inline-flex;align-items:center;min-height:44px;margin-right:14px;f
 .checkin.night>summary .sun{color:var(--on-vivid)}
 .txt3{display:flex;flex-direction:column;gap:8px}
 .txt3 label{display:flex;flex-direction:column;gap:3px;font-size:.9rem;font-weight:700}
+/* agua */
+.agua .prog i{background:var(--a-tal)}
+.agua .btns .st.add{background:var(--p-tal);color:var(--on-vivid);border-color:var(--ink);flex:2}
+.glasses{display:flex;gap:3px;flex-wrap:wrap;font-size:1.25rem;line-height:1}
+a.link{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--meta)}
 /* pestaña Guía */
 .gcard h3{display:flex;gap:8px;align-items:center}
 .gcard ol,.gcard ul{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:5px}
@@ -565,10 +570,11 @@ const GUIA={
   S("Repasa en voz alta el esquema para resolver un caso: hechos → institución civil → acción → procedimiento → artículos."),
   S("Nada nuevo.")]}}
 };
+const CUADERNO=["📒 Abrir mi cuaderno de inglés","https://lucianograuv-a11y.github.io/lucianograu/ingles/"];
 const ING=f=>{const d=new Date(f+"T12:00:00").getDay();
-  if(f>="2026-11-14"&&d===6)return {pre:"30 a 40 min.",s:[S("Perfect English Grammar: un tema de gramática y sus ejercicios."),S("ELSA Speak: una sesión de pronunciación."),S("10 minutos de conversación por voz con tu chat de inglés con Claude, sobre tu semana.")]};
-  if(f>="2026-11-15"&&d===0)return {pre:"20 min.",s:[S("Repasa los errores de la semana en tu cuaderno."),S("Describe tu cuarto en voz alta, en inglés."),S("Escribe 2 preguntas en inglés y respóndelas.")]};
-  return {pre:"Unos 15 min. Vigila: is/am/are, el sujeto («It is cold»), to/a/an, this/these, in/on/at.",s:[S("Una lección de Duolingo."),S("En tu cuaderno de inglés, escribe 1 o 2 oraciones propias sobre tu día. Ej.: «Today I study law»."),S("Control «¿sujeto y verbo?»: subraya el sujeto y el verbo de cada oración. Si falta uno, está incompleta."),S("Anota 3 palabras nuevas de la lección, con su traducción.")]};};
+  if(f>="2026-11-14"&&d===6)return {pre:"30 a 40 min.",link:CUADERNO,s:[S("Perfect English Grammar: un tema de gramática y sus ejercicios."),S("ELSA Speak: una sesión de pronunciación."),S("10 minutos de conversación por voz con tu chat de inglés con Claude, sobre tu semana.")]};
+  if(f>="2026-11-15"&&d===0)return {pre:"20 min.",link:CUADERNO,s:[S("Repasa los errores de la semana en tu cuaderno."),S("Describe tu cuarto en voz alta, en inglés."),S("Escribe 2 preguntas en inglés y respóndelas.")]};
+  return {pre:"Unos 15 min. Vigila: is/am/are, el sujeto («It is cold»), to/a/an, this/these, in/on/at.",s:[S("Una lección de Duolingo."),S("En tu cuaderno de inglés, escribe 1 o 2 oraciones propias sobre tu día. Ej.: «Today I study law»."),S("Control «¿sujeto y verbo?»: subraya el sujeto y el verbo de cada oración. Si falta uno, está incompleta."),S("Anota 5 palabras nuevas en tu cuaderno de inglés, con su significado y una oración tuya.")],link:CUADERNO};};
 const guideFor=(f,id)=>(GUIA[f]||{})[id]||(id==="r2"?ING(f):null);
 
 /* ───────── CARITAS Y ESCALAS ───────── */
@@ -612,6 +618,10 @@ const dirty=new Set();   // fechas con cambios locales sin guardar
 const saving={};
 const openD={};          // qué desplegables abrió o cerró Luciano
 let db=null, mode="cargando";
+const AJ={vaso:250,meta:2};
+try{Object.assign(AJ,JSON.parse(localStorage.getItem("plan-luciano-ajustes")||"{}"));}catch(e){}
+const saveAJ=()=>{try{localStorage.setItem("plan-luciano-ajustes",JSON.stringify(AJ));}catch(e){}};
+const litros=ml=>(Math.round(ml/50)*50/1000).toLocaleString("es-CL",{maximumFractionDigits:2});
 
 function dayPlan(f){const p=PLAN.find(x=>x.f===f);if(!p)return null;
   const tasks=[...p.t.map((t,i)=>({...t,id:"t"+i})),...RUTINAS(f).map((t,i)=>({...t,id:"r"+i}))];
@@ -670,7 +680,7 @@ function howHTML(f,t){
   const g=guideFor(f,t.id);if(!g)return"";
   const P=(getLog(f).tareas[t.id]||{}).pasos||{}, k="h-"+f+"-"+t.id, d=g.s.filter((_,i)=>P[i]).length;
   return `<details class="how" data-k="${k}"${isOpen(k,false)?" open":""}><summary>→ Cómo hacerlo <span class="muted">· ${d} de ${g.s.length}</span></summary>
-   ${g.pre?`<p class="hint">${esc(g.pre)}</p>`:""}${g.blk?`<p class="hint">${BLOQUE}</p>`:""}
+   ${g.pre?`<p class="hint">${esc(g.pre)}</p>`:""}${g.link?`<a class="link" href="${g.link[1]}" target="_blank" rel="noopener">${g.link[0]}</a>`:""}${g.blk?`<p class="hint">${BLOQUE}</p>`:""}
    <ul class="steps">${g.s.map((x,i)=>`<li class="step${P[i]?" done":""}"><button class="ck" data-act="paso" data-f="${f}" data-id="${t.id}" data-i="${i}" aria-pressed="${!!P[i]}" aria-label="Marcar paso ${i+1}">${P[i]?"✓":""}</button>
     <div class="sx">${x.b?`<b>${esc(x.b)}</b>`:""}${x.q?`<span class="qq">${esc(x.q)}</span>`:""}${x.p?`<div class="prompt">${esc(x.p)}</div><button class="copy" data-act="copy" data-txt="${esc(x.p)}">📋 Copiar texto</button>`:""}</div></li>`).join("")}</ul>
    ${d===g.s.length?`<p class="hint">Todos los pasos listos: marca la tarea como hecha.</p>`:""}</details>`;
@@ -767,6 +777,17 @@ function nightHTML(){
    </div></details>`;
 }
 
+function aguaHTML(){
+  const L=getLog(cur), ml=+L.agua||0, k="ag-"+cur, n=Math.round(ml/AJ.vaso);
+  return `<div class="card agua"><div class="section-label"><h3>💧 Agua</h3><span class="meta">${litros(ml)} L de ${String(AJ.meta).replace(".",",")} L</span></div>
+   <div class="prog" aria-hidden="true"><i style="width:${Math.min(100,Math.round(ml/(AJ.meta*10)))}%"></i></div>
+   ${n?`<div class="glasses" aria-hidden="true">${"🥛".repeat(Math.min(n,16))}${n>16?" +"+(n-16):""}</div>`:""}
+   <div class="btns"><button class="st" data-act="agua" data-v="-1" aria-label="Quitar un vaso">− vaso</button><button class="st add" data-act="agua" data-v="1">+ 1 vaso (${AJ.vaso} ml)</button></div>
+   <details class="more" data-k="${k}"${isOpen(k,false)?" open":""}><summary>+ Tamaño del vaso y meta diaria</summary>
+    <div class="q" style="margin-top:8px"><span class="ql">Mi vaso o botella</span><div class="rir">${[200,250,300,500,1000].map(v=>`<button class="chip" style="min-width:64px;border-radius:14px;font-size:.9rem" data-act="ajv" data-v="${v}" aria-pressed="${AJ.vaso===v}">${v<1000?v+" ml":"1 L"}</button>`).join("")}</div></div>
+    <div class="q"><span class="ql">Meta diaria</span><div class="rir">${[1.5,2,2.5,3].map(v=>`<button class="chip" style="min-width:64px;border-radius:14px;font-size:.9rem" data-act="ajm" data-v="${v}" aria-pressed="${AJ.meta===v}">${String(v).replace(".",",")} L</button>`).join("")}</div></div>
+   </details></div>`;
+}
 function viewHoy(){
   const p=dayPlan(cur), L=getLog(cur), d=new Date(cur+"T12:00:00").getDay();
   const [s,n]=progressOf(cur);
@@ -779,6 +800,7 @@ function viewHoy(){
   ${agenda.length?`<ul class="agenda">${agenda.map(a=>`<li>${esc(a)}</li>`).join("")}</ul>`:""}
   ${p.nota?`<div class="nota">${esc(p.nota)}</div>`:""}
   ${checkinHTML()}
+  ${aguaHTML()}
   <div class="section-label"><h3>Tareas del día</h3><span class="meta">${String(s).replace(".",",")} de ${n}</span></div>
   <div class="prog" aria-hidden="true"><i style="width:${n?Math.round(s/n*100):0}%"></i></div>
   <div class="tasks">${p.tasks.map(t=>taskHTML(cur,t)).join("")}</div>
@@ -809,11 +831,12 @@ function viewSemana(){
 function viewResumen(){
   const until=TODAY<FIRST?FIRST:TODAY>LAST?LAST:TODAY;
   const past=PLAN.filter(p=>p.f<=until).map(p=>dayPlan(p.f));
-  const by={};let tot=0,done=0,mins=0;const sl=[],ca=[],en=[],cu=[],me=[],ne=[],ns=[],emos={};
+  const by={};let tot=0,done=0,mins=0;const sl=[],ca=[],en=[],cu=[],me=[],ne=[],ns=[],ag=[],emos={};
   past.forEach(p=>{const L=getLog(p.f);p.tasks.forEach(t=>{const e=(L.tareas[t.id]||{});const v=e.estado==="hecho"?1:e.estado==="medio"?.5:0;
     (by[t.a]=by[t.a]||[0,0]);by[t.a][0]+=v;by[t.a][1]++;tot++;done+=v;mins+=+e.min||0;});
     const h=horasDormidas(L);if(h!=null)sl.push(h);
     if(L.cal!=null)ca.push(L.cal);if(L.ene!=null)en.push(L.ene);if(L.cuerpo)cu.push(L.cuerpo);if(L.mente)me.push(L.mente);
+    if(+L.agua)ag.push(+L.agua/1000);
     if(L.nEne!=null)ne.push(L.nEne);if(L.nEst!=null)ns.push(L.nEst);
     [...emoList(L,"emo"),...emoList(L,"nEmo")].forEach(k=>emos[k]=(emos[k]||0)+1);});
   const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
@@ -831,6 +854,7 @@ function viewResumen(){
   </div>
   <div class="card"><h3>Cómo vienes</h3>
    <div>Mañanas · cuerpo: ${cuA?CUERPO[Math.round(cuA)-1]+" "+NIVEL[Math.round(cuA)-1]:"–"} · mente: ${meA?MENTE[Math.round(meA)-1]+" "+NIVEL[Math.round(meA)-1]:"–"}</div>
+   <div>💧 Agua: ${fa(ag)} L por día en promedio <span class="muted small">(${ag.length} día${ag.length===1?"":"s"} anotado${ag.length===1?"":"s"})</span></div>
    <div>Noches · energía: ${fa(ne)} · estrés: ${fa(ns)} <span class="muted small">(de 10)</span></div>
    ${top.length?`<div class="meta">Emociones que más se repiten</div><div class="topemo">${top.map(([k,n])=>`<div>${face(k)}${FACES[k][0]} · ${n}</div>`).join("")}</div>`:'<p class="muted" style="margin:0">Cuando hagas los check-in, aquí verás tus emociones más frecuentes.</p>'}
   </div>
@@ -880,7 +904,8 @@ const GUIA_TAB=`
    <li>Responde en voz alta antes de escribir: la prueba es oral.</li><li>Al final, la lista de fallos va a tu hoja de fallos.</li></ol></details>
  </div>
  <div class="card gcard"><h3>🇬🇧 Ruta de inglés</h3>
-  <ul><li>Del 2 al 9: todos los días la versión corta (unos 15 min).</li><li>Desde el 10: lunes a viernes la corta; sábado y domingo, la suya.</li><li>Meta: 5 de 7 días a la semana.</li></ul>
+  <ul><li>Del 2 al 9: todos los días la versión corta (unos 15 min), con 5 palabras nuevas.</li><li>Desde el 10: lunes a viernes la corta; sábado y domingo, la suya.</li><li>Meta: 5 de 7 días a la semana.</li></ul>
+  <a class="link" href="https://lucianograuv-a11y.github.io/lucianograu/ingles/" target="_blank" rel="noopener">📒 Abrir mi cuaderno de inglés</a>
   <details><summary>Errores a vigilar</summary><ul>
    <li>Olvidar is / am / are → «I am tired», no «I tired».</li><li>Olvidar «to», «a» o «an».</li><li>Omitir el sujeto → «It is cold», no «Is cold».</li>
    <li>Confundir this / these.</li><li>Confundir in / on / at.</li></ul></details>
@@ -948,6 +973,8 @@ view.addEventListener("click",e=>{
   if(a==="paso"){const L=getLog(b.dataset.f);const t=L.tareas[b.dataset.id]=L.tareas[b.dataset.id]||{};t.pasos=t.pasos||{};const i=b.dataset.i;
     if(t.pasos[i])delete t.pasos[i];else t.pasos[i]=1;touch(b.dataset.f);render();return;}
   if(a==="copy"){copyText(b.dataset.txt,b);return;}
+  if(a==="agua"){const L=getLog(cur);L.agua=Math.max(0,(+L.agua||0)+(+b.dataset.v)*AJ.vaso);touch(cur);render();return;}
+  if(a==="ajv"||a==="ajm"){AJ[a==="ajv"?"vaso":"meta"]=+b.dataset.v;saveAJ();render();return;}
   if(a==="rir"){const L=getLog(b.dataset.f);const v=+b.dataset.v;L.rir=L.rir===v?null:v;touch(b.dataset.f);render();return;}
   if(a==="cuerpo"||a==="mente"||a==="nCuerpo"||a==="nMente"){const L=getLog(cur);const v=+b.dataset.v;L[a]=L[a]===v?null:v;touch(cur);render();return;}
   if(a==="emo"||a==="nEmo"){const L=getLog(cur);const sel=emoList(L,a),k=b.dataset.v;
