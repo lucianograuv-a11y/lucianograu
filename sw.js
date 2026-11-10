@@ -1,5 +1,5 @@
-// versión 97b34815
-const C="plan-97b34815";
+// versión 660a7436
+const C="plan-660a7436";
 const CORE=["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(CORE)));self.skipWaiting();});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith("plan-")&&k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
