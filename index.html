@@ -228,23 +228,24 @@ const PLAN=[
  {f:"2026-11-10",exam:"Prueba de Administrativo · horario de clase (fuera del plan)",agenda:[],nota:"Empieza el plan completo de ejercicio. Procesal vuelve.",t:[
   T("MER","Apunte final de Contratación Mercantil, parte 1. Pregunta → leer → cerrar y escribir requisitos y plazos.",60),
   T("TAL","Procesal, juicio ordinario: demanda y contestación. Podcast 1 + Esquema 02 + CPC arts. 254 a 261 y 303 a 312.",60)]},
- {f:"2026-11-11",agenda:["11:00–12:30 charla «Uso responsable de IA»"],t:[
-  T("MER","Después de la charla: apunte de Mercantil, parte 2.",60)]},
+ {f:"2026-11-11",agenda:["11:00–12:30 charla «Uso responsable de IA»","Clase de Mercantil: repaso de la prueba (nada nuevo)"],nota:"La prueba de Sucesorio se movió al lunes 16 a las 14:00. Desde hoy, Sucesorio va primero.",t:[
+  T("SUC","Sucesorio 1: base y ley aplicable. Apunte §1 a §5 + arts. 955, 998 y 15 CC. Audio Parte 1 en los traslados.",60),
+  T("MER","Después del repaso: anota lo que el profesor dijo que entra y súbeme sus apuntes.",30)]},
  {f:"2026-11-12",agenda:[],nota:"Hueco grande: 11:00 a 14:00.",t:[
-  T("MER","Apunte de Mercantil, parte 3.",75),
-  T("TAL","Procesal: prueba y sentencia. Podcast 2 + CPC arts. 318 a 320 y 160 a 170.",75)]},
+  T("SUC","Sucesorio 2: sucesión intestada. Apunte §15 y §16 + PPT 4. Reparte cuotas a mano.",90),
+  T("MER","Mercantil según lo que marcó el profesor en el repaso.",45)]},
  {f:"2026-11-13",agenda:[],t:[
-  T("MER","Apunte de Mercantil, parte 4.",60),
-  T("TAL","Procesal: juicio ejecutivo con el Esquema 01 (títulos del 434, excepciones del 464).",60)]},
+  T("SUC","Sucesorio 3: teoría de los acervos. Apunte §17 + PPT 5 + casos 1 a 3 de la cátedra.",90),
+  T("MER","Mercantil según lo que marcó el profesor en el repaso.",45)]},
  {f:"2026-11-14",agenda:[],t:[
-  T("MER","Requisitos y plazos de memoria: hazte tus propias tarjetas y pruébate.",90),
-  T("TAL","Civil: actos jurídicos y obligaciones (Esquema 03) + casos de integración 1 y 2, resueltos por ti.",120)]},
- {f:"2026-11-15",agenda:[],t:[
-  T("MER","Preguntas orales de Mercantil en voz alta, de todo el apunte.",60),
-  T("TAL","Civil: contratos (Esquemas 04 y 07) + casos de integración 3 y 4.",120)]},
- {f:"2026-11-16",agenda:[],nota:"Estudio entre 12:00 y 15:30. La mañana del lunes, liviana.",t:[
-  T("MER","Repaso de lo que fallaste en tarjetas y preguntas.",60),
-  T("TAL","Bienes, sucesión y responsabilidad (Esquemas 05 y 08) + casos 5 y 6.",90)]},
+  T("SUC","Sucesorio 4: asignaciones forzosas, legítima rigorosa y efectiva, mejoras y desheredamiento. PPT 7 + arts. del CC.",120),
+  T("MER","Mercantil: tarjetas de requisitos y plazos de lo que entra.",45)]},
+ {f:"2026-11-15",agenda:[],nota:"Último día de materia nueva para Sucesorio.",t:[
+  T("SUC","Sucesorio 5: sucesión testada y acciones. Apunte §18 + cuadro de §17.3 + audio Parte 2. Simulacro oral al final.",120),
+  T("MER","Mercantil: preguntas orales en voz alta.",30)]},
+ {f:"2026-11-16",exam:"Prueba de Derecho Sucesorio · 14:00",agenda:[],nota:"Estudio solo hasta las 12:00. Nada nuevo. Después de la prueba, descansa un rato antes del Taller.",t:[
+  T("SUC","Repaso final hasta las 12:00: hoja de fallos + un reparto de cuotas y un acervo de práctica.",90),
+  T("TAL","Después de la prueba: Procesal en mapa (ordinario, prueba y sentencia, ejecutivo). Solo lo grueso.",60)]},
  {f:"2026-11-17",agenda:[],nota:"Mañana es la prueba de Mercantil. Si hoy no alcanzas la sesión de ejercicio, haz la siguiente que toque.",t:[
   T("MER","Simulacro oral de Mercantil con Claude.",60),
   T("MER","Hoja de fallos del simulacro.",30),
@@ -504,58 +505,55 @@ const GUIA={
    S("Esquema 02, puntos 8 (secuencia completa del ordinario) y 9 (excepciones y reconvención)."),
    S("Lee en el CPC los arts. 254 a 261 (demanda) y 303 a 312 (excepciones dilatorias y contestación)."),
    B("Escribe de memoria:","¿Qué requisitos tiene la demanda? ¿Qué excepciones dilatorias existen? ¿Qué pasa si el demandado no contesta?")]}},
- "2026-11-11":{t0:{blk:1,pre:"Parte II: compraventa mercantil. Tres bloques.",s:[
-  B("Bloque 1 · Puntos 1 y 2: definición y diferencias con la civil","¿Cuándo es mercantil una compraventa? ¿En qué se diferencia de la civil en el precio, los riesgos, la tradición y la resolución (saneamiento y plazos)?"),
-  B("Bloque 2 · Puntos 3 y 4: tipos y compraventas especiales","¿Qué son la compraventa en bloque, la venta por consignación, la de muebles a plazo con prenda sin desplazamiento y la compraventa en bolsa?"),
-  B("Bloque 3 · Punto 5: obligaciones y derechos de las partes","¿Qué debe el vendedor y qué el comprador? Anota cada plazo que aparezca."),
-  S("Repaso de la Parte I (15 min, repaso de 1 día): tapa el apunte y responde las preguntas de ayer.")]}},
+ "2026-11-11":{
+  t0:{blk:1,pre:"Tu apunte «SUCESORIO PARA SENA» es la base. Dos bloques y la ley aplicable.",s:[
+   B("Bloque 1 · Apunte §1 a §3: concepto, principios y sucesión por causa de muerte","¿Qué principios informan el derecho sucesorio? ¿Qué significa que el heredero continúa la persona del causante? ¿Qué características tiene la sucesión por causa de muerte (art. 951 y 954)?"),
+   B("Bloque 2 · Apunte §4 y §5: asignatarios y tipos de sucesión","¿Qué diferencia al heredero del legatario? ¿En qué tres hipótesis opera la sucesión intestada (art. 980)? ¿Qué es la sucesión mixta y qué reglas sigue?"),
+   B("Bloque 3 · Ley que rige la sucesión: arts. 955, 998 y 15 Nº 2 CC (léelos en la ley, no en un resumen)","¿Dónde y cuándo se abre la sucesión, y por qué la rige la ley del último domicilio (art. 955)? ¿Qué derechos tienen los chilenos en la sucesión intestada de un extranjero, y cómo se pagan con los bienes que estén en Chile (art. 998)? ¿Qué agrega el art. 15 Nº 2 sobre los chilenos con domicilio en el extranjero? ¿Qué dice tu apunte (§2.2) sobre el último domicilio?"),
+   S("En los traslados: audio «Sucesorio Parte 1» (78 min). No hace falta terminarlo hoy.")],
+   link:["⚖️ Código Civil en LeyChile","https://www.bcn.cl/leychile/navegar?idNorma=172986"]},
+  t1:{s:[
+   S("En la clase de repaso, anota en una sola hoja qué temas dijo el profesor que entran y cuáles no."),
+   S("Mándame esa hoja y los apuntes del profesor: con eso ajusto los días 12 a 17 de Mercantil.")]}},
  "2026-11-12":{
-  t0:{blk:1,pre:"Parte III: mandato comercial. Tres bloques.",s:[
-   B("Bloque 1 · Puntos 1 y 2.1 a 2.3: comisión mercantil","¿Cómo se clasifica el mandato comercial? ¿Qué obligaciones, prohibiciones y derechos tiene el comisionista?"),
-   B("Bloque 2 · Puntos 2.4 a 2.6 y 3: tipos de comisión y corretaje","¿Qué diferencia la comisión para comprar y para vender? ¿Qué es el comisionista de transporte? ¿Cómo se extingue la comisión? ¿Qué hacen los corredores de comercio y de seguros?"),
-   B("Bloque 3 · Punto 4: factores y dependientes","¿Qué es un factor y qué es un mancebo o dependiente? ¿Cómo termina su mandato?")]},
-  t1:{s:[
-   S("Podcast 2 «Dilatorias, rebeldía y prueba»."),
-   S("Esquema 02, puntos 10 (la prueba) y 7 (resoluciones judiciales y sentencia)."),
-   S("Lee en el CPC los arts. 318 a 320 (recepción de la causa a prueba) y 160 a 170 (sentencia)."),
-   B("Escribe de memoria:","¿Qué contiene la resolución que recibe la causa a prueba? ¿Qué requisitos tiene la sentencia definitiva?")]}},
+  t0:{blk:1,pre:"Sucesión intestada. Tres bloques y un ejercicio de reparto.",s:[
+   B("Bloque 1 · Apunte §15: derecho de representación","¿Cuándo opera la representación («no quiso» o «no pudo» suceder)? ¿En qué órdenes opera y en cuál no? ¿Qué diferencia hay entre dividir por estirpe y por cabeza?"),
+   B("Bloque 2 · Apunte §16.1 a §16.4 + PPT 4: primer y segundo orden","¿Cómo se reparte entre hijos y cónyuge en el primer orden (art. 988)? ¿Qué pasa con el cónyuge y los ascendientes en el segundo (art. 989)? ¿Quiénes quedan excluidos (art. 994)?"),
+   B("Bloque 3 · Apunte §16.5 a §16.7 + PPT 4: hermanos, colaterales y Fisco","¿Cómo se reparte entre hermanos de simple y doble conjunción? ¿Hasta qué grado heredan los colaterales? ¿Cuándo hereda el Fisco?"),
+   S("Ejercicio (10 min): causante con cónyuge y 3 hijos, uno premuerto con 2 hijos. Reparte la herencia de 120 por estirpe y verifica con el apunte.")]},
+  t1:{s:[S("Trabaja con los apuntes del profesor y lo que anotaste en el repaso. Si aún no me los mandas, usa el apunte final de Mercantil, parte 2.")]}},
  "2026-11-13":{
-  t0:{blk:1,pre:"Parte IV: contrato de seguro. Tres bloques.",s:[
-   B("Bloque 1 · Puntos 1 a 4: introducción, clasificación y definición","¿Por qué el seguro tiene carácter imperativo? ¿Cómo se clasifican los seguros? ¿Cuál es la definición legal y qué características tiene?"),
-   B("Bloque 2 · Puntos 5 a 7: principios, elementos y póliza","¿Qué principios informan el seguro? ¿Cuáles son sus elementos subjetivos y materiales? ¿Cómo se celebra y qué es la póliza?"),
-   B("Bloque 3 · Puntos 8 a 10: efectos, terminación y seguros marítimos","¿Qué obligaciones y cargas tiene el asegurado y cuáles el asegurador? ¿Cómo termina el contrato?"),
-   S("Repaso de la Parte II (15 min, repaso de 1 día).")]},
-  t1:{s:[
-   S("Esquema 01, puntos 2 y 5: los siete títulos ejecutivos del art. 434 y la gestión preparatoria."),
-   S("Punto 8: la oposición del ejecutado y las excepciones del art. 464."),
-   S("Punto 15: línea de tiempo del ejecutivo."),
-   S("Escribe de memoria los siete títulos y todas las excepciones que recuerdes. Verifica.")]}},
+  t0:{blk:1,pre:"Teoría de los acervos: es la parte que más se presta para ejercicios.",s:[
+   B("Bloque 1 · Apunte §17.1 + PPT 5: del acervo bruto al líquido","¿Qué es el acervo bruto, el ilíquido y el líquido o partible? ¿Cuáles son las bajas generales del art. 959?"),
+   B("Bloque 2 · Apunte §17.2 + PPT 5: acervos imaginarios","¿Cuándo se forma el primer acervo imaginario (art. 1185) y qué se acumula? ¿Cuándo el segundo (art. 1186)? ¿En qué se diferencian?"),
+   B("Bloque 3 · Apunte §17.4: cómo se pagan las legítimas","¿Qué se imputa a la legítima y qué no? ¿Por qué los gastos de educación no se imputan?"),
+   S("Resuelve por escrito los casos 1, 2 y 3 de la cátedra (apunte §17.5 o PPT 5). Después corrige.")]},
+  t1:{s:[S("Mercantil según lo que marcó el profesor. Si aún no hay apuntes, usa el apunte final, parte 3.")]}},
  "2026-11-14":{
-  t0:{s:[
-   S("Recorre las cuatro partes del apunte y haz una tarjeta por cada requisito, plazo o lista. Adelante va la pregunta; atrás, la respuesta y su ubicación."),
-   S("Baraja las tarjetas y pruébate. Las que fallas van a un montón aparte."),
-   S("Repite solo el montón de falladas hasta vaciarlo.")]},
-  t1:{s:[
-   S("Esquema 03 en cuatro bloques: puntos 1 a 6 (contratos y nulidad) → 7 a 11 (efectos, modalidades, cláusula penal) → 12 (incumplimiento y responsabilidad contractual) → 13 a 15 (extinción, prueba, prescripción)."),
-   S("Caso 1, resuélvelo tú: la parcela comprada en 2005 por escritura pero nunca inscrita, la reivindicatoria y la prescripción adquisitiva alegada."),
-   S("Caso 2: la compraventa del departamento en La Serena con saldo de precio impago."),
-   S("Recién después de resolverlos, compara con las respuestas narrativas de los casos 1 y 2.")]}},
+  t0:{blk:1,pre:"Asignaciones forzosas: lo que más preguntaron. Tu apunte no tiene capítulo propio de legítimas, así que la base aquí es el PPT 7 y el Código.",s:[
+   B("Bloque 1 · PPT 7 + arts. 1167 y 1181 a 1182: asignaciones forzosas y legitimarios","¿Cuáles son las asignaciones forzosas? ¿Quiénes son legitimarios? ¿Qué pasa con el cónyuge y el conviviente civil?"),
+   B("Bloque 2 · PPT 7 + arts. 1184 y 1191: legítima rigorosa y efectiva","¿Cómo se calcula la mitad legitimaria? ¿Qué es la legítima rigorosa? ¿Cuándo se transforma en efectiva y qué se le agrega? Haz el ejemplo de don Juan Larraín del PPT."),
+   B("Bloque 3 · PPT 7 + arts. 1195 y 1207 a 1211: cuarta de mejoras, desheredamiento y preterición","¿A quiénes puede favorecer la cuarta de mejoras? ¿Qué es el desheredamiento y cuáles son sus causales? ¿Qué efecto tiene la preterición de un legitimario (art. 1218)?"),
+   S("Audio «Sucesorio Parte 1», tramo final (audios 09 y 10: acervos y legítimas), como repaso.")],
+   link:["⚖️ Código Civil en LeyChile","https://www.bcn.cl/leychile/navegar?idNorma=172986"]},
+  t1:{s:[S("Tarjetas: una por cada requisito o plazo de lo que el profesor dijo que entra. Pregunta adelante; respuesta y artículo atrás.")]}},
  "2026-11-15":{
-  t0:{s:[PR("Copia este texto en un chat nuevo con Claude y responde en voz alta:","Hazme preguntas orales de Contratación Mercantil, una a la vez, sobre las cuatro partes de mi apunte: introductoria, compraventa mercantil, mandato comercial y seguro. Pon énfasis en requisitos y plazos. Corrígeme después de cada respuesta y al final dame la lista de lo que fallé.")]},
-  t1:{s:[
-   S("Esquema 04: compraventa, arrendamiento, mandato, comodato, mutuo, fianza, prenda, hipoteca y transacción."),
-   S("Esquema 07: arrendamiento completo y Ley 18.101, donación, permuta, cesión de créditos, depósito y sociedad."),
-   S("Caso 3: la oficina prestada a la sobrina que se niega a devolverla."),
-   S("Caso 4: la casa construida con retraso por la constructora Las Torcazas Negras."),
-   S("Compara con las respuestas narrativas de los casos 3 y 4.")]}},
+  t0:{blk:1,pre:"Sucesión testada y todas las acciones. Al final, simulacro.",s:[
+   B("Bloque 1 · Apunte §18.1 a §18.4: el testamento","¿Qué es el testamento y qué características tiene? ¿Qué requisitos internos y externos exige? ¿Cuándo es nulo el testamento solemne (art. 1026)?"),
+   B("Bloque 2 · Apunte §18.5: asignaciones testamentarias y clases de herederos","¿Qué efectos tienen la condición, el plazo y el modo? ¿Qué diferencia al heredero universal, al de cuota y al del remanente?"),
+   B("Bloque 3 · Apunte §17.3: las acciones","Compara nulidad del testamento, acción de reforma (art. 1216) e inoficiosa donación: ¿quién las ejerce, contra quién y en qué plazo? ¿Qué son la acción de petición de herencia (art. 1264) y la reivindicatoria del heredero (art. 1268)?"),
+   S("Audio «Sucesorio Parte 2» (70 min): mejoras, testada y acciones."),
+   PR("Simulacro (20 min). Copia este texto en un chat nuevo con Claude y responde en voz alta:","Hazme un simulacro oral de Derecho Sucesorio para mi prueba del lunes. Una pregunta a la vez, como un profesor. Solo de estos temas: sucesión testada e intestada, órdenes de sucesión, teoría de los acervos, asignaciones forzosas, legítima rigorosa y efectiva, mejoras, desheredamiento, acciones (reforma, inoficiosa donación, nulidad del testamento, petición de herencia, reivindicatoria) y ley que rige la sucesión (arts. 955, 998 y 15 Nº 2). Incluye un ejercicio de reparto. Corrígeme citando el artículo y al final dame mis fallos en una lista.")]},
+  t1:{s:[PR("Copia este texto en un chat nuevo con Claude y responde en voz alta:","Hazme preguntas orales de Contratación Mercantil, una a la vez, solo de los temas que el profesor dijo que entran. Corrígeme y cita el artículo.")]}},
  "2026-11-16":{
-  t0:{s:[S("Tarjetas falladas + lista de fallos del domingo. Cada una: tapa, responde, destapa.")]},
+  t0:{pre:"Hasta las 12:00. Nada nuevo.",s:[
+   S("Hoja de fallos del simulacro del domingo: tapa, responde en voz alta, destapa."),
+   S("Un reparto de cuotas intestado y un acervo imaginario, a mano y cronometrado (15 min cada uno)."),
+   S("Lee una vez los arts. 955, 988, 1181, 1184 y 1216 del Código."),
+   S("A las 12:00 cierras todo. Almuerza, camina y llega tranquilo.")]},
   t1:{s:[
-   S("Esquema 05: bienes, dominio, tradición, posesión, acciones reales, sucesión y responsabilidad extracontractual."),
-   S("Esquema 08: limitaciones del dominio, fideicomiso, usufructo, servidumbres y comunidad."),
-   S("Caso 5: la obra del hospital que no pudo empezar porque el terreno estaba ocupado."),
-   S("Caso 6: el crédito con fiador solidario e hipoteca sobre un inmueble que se incendió."),
-   S("Compara con las respuestas narrativas de los casos 5 y 6.")]}},
+   S("Procesal en mapa: demanda, contestación, prueba y sentencia del ordinario (Podcast 1 y 2 si los quieres escuchar)."),
+   S("Juicio ejecutivo: títulos del art. 434 y excepciones del art. 464, solo la lista.")]}},
  "2026-11-17":{
   t0:{s:[PR("Copia este texto en un chat nuevo con Claude y responde en voz alta:","Hazme un simulacro oral de Contratación Mercantil para mi prueba de mañana. Una pregunta a la vez, como lo haría un profesor. Corrígeme según mi apunte y cita el artículo cuando corresponda. Incluye requisitos y plazos de las cuatro partes. Al final dame la lista de lo que fallé.")]},
   t1:{s:[S("Copia los fallos del simulacro a tu hoja «Fallos Mercantil».")]},
