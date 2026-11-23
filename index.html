@@ -198,7 +198,7 @@ a.link{display:inline-flex;align-items:center;min-height:44px;font-weight:700;co
 
 <script>
 /* ───────── PLAN ───────── */
-const AREAS={SUC:["Sucesorio","suc"],TRI:["Tributario","tri"],MER:["Mercantil","mer"],TAL:["Taller (Civil y Procesal)","tal"],OPT:["Optativo","opt"],PEO:["Proc. Especiales Orales","peo"],RUT:["Rutina","rut"],FZA:["Ejercicio","fza"]};
+const AREAS={SUC:["Sucesorio","suc"],TRI:["Tributario","tri"],MER:["Mercantil","mer"],TAL:["Taller (Civil y Procesal)","tal"],ADM:["Administrativo","tri"],OPT:["Optativo","opt"],PEO:["Proc. Especiales Orales","peo"],RUT:["Rutina","rut"],FZA:["Ejercicio","fza"]};
 const CLASES={1:"15:30–18:20 clases",2:"14:00–16:50 clases",3:"08:00–10:50 · 14:00–16:50 · 17:00–18:20 clases",4:"09:30–10:50 · 14:00–16:50 clases",5:"14:00–16:50 clases"};
 const T=(a,txt,min)=>({a,txt,min});
 const PLAN=[
@@ -263,8 +263,9 @@ const PLAN=[
   T("TAL","Caso 7, suave: audio (17 min) + láminas del torpedo, y la pestaña «Preguntas».",35),
   T("TAL","Caso 7, simulacro con Claude: preguntas civiles 1 a 5 (págs. 11 a 13).",60),
   T("TAL","Caso 7, simulacro con Claude: preguntas procesales 1 a 5 y etapas del juicio ordinario (págs. 14 a 16).",60),
-  T("TAL","Noche: Caso 13, primera lectura: cronología (pág. 17) y vías del DL en civil 2 (pág. 18).",40)]},
+  T("ADM","Noche: preparar la prueba voluntaria de Administrativo (martes 24).",90)]},
  {f:"2026-11-24",exam:"Administrativo voluntaria (si decides darla)",agenda:[],t:[
+  T("TAL","Temprano: Caso 13, primera lectura: cronología (pág. 17) y vías del DL en civil 2 (pág. 18).",40),
   T("TAL","Caso 7, repaso rápido: un bloque de preguntas mezcladas con Claude.",20),
   T("TAL","Caso 13, simulacro con Claude: civil, procesal con las etapas del sumario y puntos discutibles (págs. 18 a 22).",80),
   T("TAL","Caso 2, parte civil: lectura y simulacro (págs. 1 a 3).",60),
@@ -464,29 +465,29 @@ const GUIA={
    S("Bloque 1: procesal 1 (procedimiento y tribunal) con las 7 etapas del juicio ordinario."),
    S("Bloque 2: procesal 2 (suma de la demanda) y procesal 3 (plazos para contestar)."),
    S("Bloque 3: procesal 4 (actitudes de la constructora) y procesal 5 (cómo se opone la prescripción)."),
-   S("Lee en la ley solo los artículos que fallaste. Anótalos en la hoja de errores.")]},
-  t3:{blk:1,pre:"Caso 13, solo lectura. Dos bloques.",s:[
+   S("Lee en la ley solo los artículos que fallaste. Anótalos en la hoja de errores.")]}},
+ "2026-11-24":{
+  t0:{blk:1,pre:"Caso 13, solo lectura. Dos bloques.",s:[
    S("Bloque 1: «Descripción breve» y «Cronología» del Caso 13 (pág. 17). Fíjate en las tres fechas: 30-jun-2023, 30-jun-2025 y 30-jun-2028."),
    S("Bloque 2: civil 2 (pág. 18): las cuatro vías (oposición, acción de dominio, compensación, acción penal) y cómo se tramita cada una."),
-   S("Nada más. A dormir.")]}},
- "2026-11-24":{
-  t0:{s:[S("Escríbele a Claude «Repaso Caso 7». Responde sin mirar. Lo que falles va a la hoja de errores.")]},
-  t1:{blk:1,pre:"Caso 13 (págs. 18 a 22). Cuatro bloques con Claude.",s:[ANTES,
+   S("Después sigue con el repaso del Caso 7.")]},
+  t1:{s:[S("Escríbele a Claude «Repaso Caso 7». Responde sin mirar. Lo que falles va a la hoja de errores.")]},
+  t2:{blk:1,pre:"Caso 13 (págs. 18 a 22). Cuatro bloques con Claude.",s:[ANTES,
    S("Bloque 1: civil 1 (quién es el dueño actual, con la salvedad del art. 9) y civil 2 (las cuatro vías)."),
    S("Bloque 2: procesal 1 (recomendaciones) y procesal 2 (las 7 etapas del juicio sumario)."),
    S("Bloque 3: procesal 3 (plazo para contestar) y procesal 4 (defensas de Herrera)."),
    S("Bloque 4: puntos discutibles (págs. 21 y 22): exclusividad del art. 18, acción del art. 26 como reivindicatoria, posesión inscrita frente a material, Tribunal Constitucional y reformas.")]},
-  t2:{blk:1,pre:"Caso 2, parte civil (págs. 1 a 3). Un bloque de lectura y dos de simulacro.",s:[ANTES,
+  t3:{blk:1,pre:"Caso 2, parte civil (págs. 1 a 3). Un bloque de lectura y dos de simulacro.",s:[ANTES,
    S("Bloque 1: «Descripción breve» y «Cronología» (pág. 1). Clave: el art. 730 (usurpar no es lo mismo que enajenar)."),
    S("Bloque 2, con Claude: civil 1 (calidades de Andrés y Joaquín) y civil 2 (¿puede Joaquín prescribir?)."),
    S("Bloque 3, con Claude: civil 3 (Paulina, poseedora regular) y civil 4 (importancia de su buena fe y el supuesto contrario).")]},
-  t3:{blk:1,pre:"Caso 2, parte procesal (págs. 3 a 9). Cuatro bloques con Claude.",s:[ANTES,
+  t4:{blk:1,pre:"Caso 2, parte procesal (págs. 3 a 9). Cuatro bloques con Claude.",s:[ANTES,
    S("Bloque 1: procesal 1 (acciones de Andrés contra Joaquín y contra Paulina, secuestro, acción penal; págs. 3 y 4)."),
    S("Bloque 2: procesal 2 (competencia civil y penal, notificación de Joaquín; págs. 4 y 5)."),
    S("Bloque 3: procesal 3 (juicio de la Ley 18.101, monitorio, cuál conviene, recuadro penal; págs. 5 a 7)."),
    S("Bloque 4: procesal 4 (evicción de Paulina; págs. 7 y 8) y puntos discutibles (págs. 8 y 9).")]},
-  t4:{s:[S("Solo revisar lo que ya resolviste. Si a los 30 min no terminaste, igual cierras.")]},
-  t5:{s:[S("Relee tu hoja de errores. Por cada línea, abre el artículo y léelo completo una vez."),S("Duerme al menos 6 horas.")]}},
+  t5:{s:[S("Solo revisar lo que ya resolviste. Si a los 30 min no terminaste, igual cierras.")]},
+  t6:{s:[S("Relee tu hoja de errores. Por cada línea, abre el artículo y léelo completo una vez."),S("Duerme al menos 6 horas.")]}},
  "2026-11-25":{
   t1:{blk:1,pre:"Simulacro final mixto. Tres o cuatro bloques con Claude.",s:[
    S("Escríbele a Claude «Simulacro final». Te preguntará mezclando los tres casos, con repreguntas como el profesor."),
