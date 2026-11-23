@@ -260,7 +260,7 @@ const PLAN=[
  {f:"2026-11-21",prov:1,agenda:[],t:[T("OPT","Optativo: primera parte del programa.",150),T("RUT","Decide si das la prueba voluntaria de Administrativo (24 nov).",5)]},
  {f:"2026-11-22",prov:1,agenda:[],t:[T("OPT","Optativo: segunda parte del programa.",150)]},
  {f:"2026-11-23",agenda:[],nota:"Exposición del Taller: miércoles 25 a las 14:00. Todo en bloques de 15 min + 5 de pausa. Lees solo lo que dice cada tarea, en tu Word «Casos integracion 2, 7 y 13».",t:[
-  T("TAL","Caso 7, lectura suave: cronología (pág. 10) y puntos discutibles (pág. 16).",35),
+  T("TAL","Caso 7, suave: audio (17 min) + láminas del torpedo, y la pestaña «Preguntas».",35),
   T("TAL","Caso 7, simulacro con Claude: preguntas civiles 1 a 5 (págs. 11 a 13).",60),
   T("TAL","Caso 7, simulacro con Claude: preguntas procesales 1 a 5 y etapas del juicio ordinario (págs. 14 a 16).",60),
   T("TAL","Noche: Caso 13, primera lectura: cronología (pág. 17) y vías del DL en civil 2 (pág. 18).",40)]},
@@ -449,10 +449,11 @@ const SUC1=[
 const ANTES=S("Antes de empezar: celular en «No molestar» y boca abajo; material, hoja en blanco y lápiz de otro color; temporizador en 15 min.");
 const GUIA={
  "2026-11-23":{
-  t0:{blk:1,pre:"Word «Casos integracion 2, 7 y 13», Caso 7. Dos bloques, sin simulacro: solo entender la historia.",s:[ANTES,
-   S("Bloque 1: lee la «Descripción breve» y la «Cronología» del Caso 7 (pág. 10). Por cada hito (➔), di en voz alta qué institución aparece y con qué artículo."),
-   S("Bloque 2: lee los «Puntos discutibles» del Caso 7 (pág. 16). Son las preguntas trampa: ordinario o ejecutivo, el precio como perjuicio, cómputo e interrupción de la prescripción, daño moral, incumplimiento esencial."),
-   B("Cierra el Word y escribe en 5 líneas:","¿Qué contrato es? ¿Qué incumplió la empresa? ¿Qué demandó Javier y cuándo? ¿Desde cuándo corre la prescripción? ¿Qué procedimiento se aplica?")]},
+  t0:{blk:1,pre:"Archivos: Estudio\Caso7_audio.mp3 y Caso7_torpedo.html (en ENTREGA_FINAL\Casos_taller). Sin simulacro todavía.",s:[ANTES,
+   S("Abre el torpedo en el celular y pon el audio. Cuando diga «Pasa a la lámina N», toca esa pestaña."),
+   S("Cuando diga «Piénsalo», pausa y responde en voz alta antes de seguir."),
+   S("Al terminar, haz la pestaña «Preguntas» sin mirar: responde y después abre."),
+   S("Lo que falles va a tu «Hoja de errores del Taller», con su artículo.")]},
   t1:{blk:1,pre:"Caso 7, preguntas de Derecho Civil (págs. 11 a 13). Tres bloques con Claude.",s:[ANTES,
    S("Antes de cada bloque, lee solo la pregunta que toca (máx. 5 min). Después, escríbele a Claude: «Simulacro Caso 7, civil N»."),
    S("Bloque 1: civil 1 (incumplimiento) y civil 2 (posibilidades, resolución y sus requisitos)."),
